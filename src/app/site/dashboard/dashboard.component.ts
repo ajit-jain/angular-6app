@@ -1,4 +1,3 @@
-import { jqxCalendarComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxcalendar';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Moment } from 'moment';
 import { IgxCalendarComponent } from 'igniteui-angular';

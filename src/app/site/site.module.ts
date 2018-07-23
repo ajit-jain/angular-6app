@@ -7,7 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
 import { SettingsComponent } from './settings/settings.component';
 import { FormsModule } from '@angular/forms';
-import { jqxCalendarComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxcalendar';
 import { IgxCalendarModule } from 'igniteui-angular';
 import { AddSplitiiComponent } from './add-splitii/add-splitii.component';
 const routing: Routes = [
@@ -19,7 +18,7 @@ const routing: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'addSplitii', component: AddSplitiiComponent },
-      
+
     ]
   }
 ];
@@ -32,6 +31,6 @@ const routes: ModuleWithProviders = RouterModule.forChild(routing);
     FormsModule
   ],
 
-  declarations: [SiteComponent, DashboardComponent, SettingsComponent, jqxCalendarComponent, AddSplitiiComponent],
+  declarations: [SiteComponent, DashboardComponent, SettingsComponent, AddSplitiiComponent],
 })
 export class SiteModule { }

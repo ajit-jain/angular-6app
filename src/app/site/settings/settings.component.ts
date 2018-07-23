@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'src/app/shared/services/cookie.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _cookieService:CookieService,private router:Router) { }
 
   ngOnInit() {
+  }
+  logout(){
+    this._cookieService.eraseCookie('token');
+    this.router.navigate(['/']);
   }
 
 }

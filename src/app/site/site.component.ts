@@ -12,8 +12,15 @@ export class SiteComponent implements OnInit {
 
   ngOnInit() {
     const address = window.location.href;
-    const childRoute = address.split('/')[4];
-    if (!childRoute) {
+    const childRoute = address.split('/');
+    let isChildRoute = false;
+    for (let i = 0; i <= childRoute.length; i++) {
+      if (['dashboard', 'settings', 'addSplitii'].includes(childRoute[i])) {
+        isChildRoute = true;
+        break;
+      }
+    }
+    if (!isChildRoute) {
       this._router.navigate(['/site/dashboard']);
     }
   }
