@@ -1,0 +1,40 @@
+<form id="signup" [formGroup]="signupForm" (ngSubmit)="createAccount(signupForm.value)">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="nameHelpBlock">
+    <div class="form-control-feedback" *ngIf="signupForm.get('name').errors && (signupForm.get('name').dirty || signupForm.get('name').touched)">
+      <p *ngIf="signupForm.get('name').errors.required">name is required</p>
+    </div>
+    <!-- <small id="nameHelpBlock" class="form-text text-muted">
+    </small> -->
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock">
+    <div class="form-control-feedback" *ngIf="signupForm.get('email').errors && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+      <p *ngIf="signupForm.get('email').errors.required">email is required</p>
+      <p *ngIf="signupForm.get('email').errors.email">enter valid email</p>      
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" class="form-control" formControlName="password" aria-describedby="passwordHelpBlock">
+    <div class="form-control-feedback" *ngIf="signupForm.get('password').errors && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+      <p *ngIf="signupForm.get('password').errors.required">password is required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="partner-email">Partner's email</label>
+    <input type="text" id="partner-email" class="form-control" formControlName="partner_email" aria-describedby="partnerEmailHelpBlock">
+    <div class="form-control-feedback" *ngIf="signupForm.get('partner_email').errors && (signupForm.get('partner_email').dirty || signupForm.get('partner_email').touched)">
+      <p *ngIf="signupForm.get('partner_email').errors.required">partner email is required</p>
+      <p *ngIf="signupForm.get('partner_email').errors.email">enter valid email</p>      
+      
+    </div>
+  </div>
+
+  <button type="submit" class="btn mb-2" [disabled]="!signupForm.valid">Create Account</button>
+  <div>Already have account?
+    <a href="javascript::void(0)" (click)="changeAuthType('login')">Log in</a>
+  </div>
+</form>

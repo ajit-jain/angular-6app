@@ -1,0 +1,49 @@
+#dashboard {
+  position: relative;
+  float: left;
+  width: 100%;
+  /* padding: 22px; */
+  font-size: 13px;
+}
+
+#dashboard #leftDiv,
+#rightDiv {
+  position: relative;
+  width: 50%;
+  float: left;
+}
+
+#dashboard .btn1 {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: rgba(108, 88, 179, 0.75);
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(108, 89, 179, 0.75);
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  padding: 7px 10px;
+}
+#dashboard p.heading{
+    margin: 0 0 0 -10px;
+    font-size: 12px;
+}
+#dashboard #payments p {
+    margin:0;
+    padding:0;
+    font-size:9px;
+    line-height: 1rem;
+}
+#dashboard #payments p:nth-child(2) {
+    font-size:13px;
+}
+#dashboard #payments hr{
+  margin: 6px 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+/* @media screen and (max-width: 767px) {
+  #dashboard #leftDiv {
+    font-size: 0.8rem !important;
+  }
+} */

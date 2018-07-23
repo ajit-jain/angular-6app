@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+* {
+  box-sizing: border-box;
+}
+
+body {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.outer {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.fixed-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.fixed-footer #footerDiv {
+  border-top: 1px solid #EFEFEF;
+  padding: 18px 15px;
+  background: white;
+}
+
+.fixed-footer #footerDiv #addButton {
+  position: absolute;
+  top: -44%;
+  left: 42%;
+  text-align: center;
+}
+
+.fixed-footer #footerDiv a i {
+  color: black;
+  font-size: 20px;
+}
+
+.fixed-footer #footerDiv #addButton a i {
+  font-size: 50px;
+  color: #FCCB20;
+  background: white;
+  border-radius: 50%;
+}

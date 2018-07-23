@@ -1,14 +1,39 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { LoginGuard } from './shared/guards/login.guard';
+import { SiteModule } from './site/site.module';
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 
 import { AppComponent } from './app.component';
-
+import { ModuleWithProviders } from '@angular/core';
+import { AuthComponent } from 'src/app/shared/auth/auth.component';
+import { FormsModule } from '@angular/forms';
+const routing: Routes = [
+  {
+    path: '',
+    component: AuthComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'site',
+    loadChildren: './site/site.module#SiteModule'
+  }
+];
+const routes: ModuleWithProviders = RouterModule.forRoot(routing);
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    routes,
+    SharedModule,
+    FormsModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
