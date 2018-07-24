@@ -11,7 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ModuleWithProviders } from '@angular/core';
 import { AuthComponent } from 'src/app/shared/auth/auth.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routing: Routes = [
   {
     path: '',
@@ -33,7 +33,8 @@ const routes: ModuleWithProviders = RouterModule.forRoot(routing);
     SharedModule,
     FormsModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
