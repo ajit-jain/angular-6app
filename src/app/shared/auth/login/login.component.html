@@ -1,4 +1,4 @@
-<form id="signup" [formGroup]="loginForm" (click)="login(loginForm.value)">
+<form id="signup" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
     <div class="form-group">
       <label for="email">Email</label>
       <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock">
