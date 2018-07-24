@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/shared/services/cookie.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -8,12 +9,18 @@ import { CookieService } from 'src/app/shared/services/cookie.service';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
-  constructor(private _cookieService:CookieService,private router:Router) { }
+  settingsForm: FormGroup;
+  constructor(private _cookieService: CookieService, private router: Router, private _fb: FormBuilder) { }
 
   ngOnInit() {
+    this.settingsForm = this._fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      partner_email: ['', [Validators.required, Validators.email]],
+      name: ['',[Validators.required]],
+      // currency: ['',[Validators.required]]
+    });
   }
-  logout(){
+  logout() {
     this._cookieService.eraseCookie('token');
     this.router.navigate(['/']);
   }

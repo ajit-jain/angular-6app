@@ -1,4 +1,38 @@
-<p>
-<button class="btn btn-default" (click)="logout()"> Logout </button>
+<div  id="settings" class="row" style="padding: 40px;">
+  <div class="col-1 col-md-1"></div>
+  <div class="col-10 col-md-10">
 
-</p>
+    <form [formGroup]="settingsForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="nameHelpBlock">
+        <div class="form-control-feedback" *ngIf="settingsForm.get('name').errors && (settingsForm.get('name').dirty || settingsForm.get('name').touched)">
+          <p *ngIf="settingsForm.get('name').errors.required">name is required</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock">
+        <div class="form-control-feedback" *ngIf="settingsForm.get('email').errors && (settingsForm.get('email').dirty || settingsForm.get('email').touched)">
+          <p *ngIf="settingsForm.get('email').errors.required">email is required</p>
+          <p *ngIf="settingsForm.get('email').errors.email">enter valid email</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="partner_email">Patner's email</label>
+        <input type="partner_email" id="partner_email" class="form-control" formControlName="partner_email" aria-describedby="partner_emailHelpBlock">
+        <div class="form-control-feedback" *ngIf="settingsForm.get('partner_email').errors && (settingsForm.get('partner_email').dirty || settingsForm.get('partner_email').touched)">
+          <p *ngIf="settingsForm.get('partner_email').errors.required">partner_email is required</p>
+        </div>
+      </div>
+
+
+    </form>
+    <div style="margin-bottom:1rem">
+            <button class="btn1"> Contact Support </button>            
+    </div>
+    <button class="btn2" (click)="logout()">Logout</button>
+  </div>
+  <div class="col-1 col-md-1"></div>
+
+</div>

@@ -6,7 +6,7 @@ import { SiteComponent } from './site.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
 import { SettingsComponent } from './settings/settings.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IgxCalendarModule } from 'igniteui-angular';
 import { AddSplitiiComponent } from './add-splitii/add-splitii.component';
 const routing: Routes = [
@@ -28,7 +28,8 @@ const routes: ModuleWithProviders = RouterModule.forChild(routing);
     IgxCalendarModule,
     routes,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   declarations: [SiteComponent, DashboardComponent, SettingsComponent, AddSplitiiComponent],
