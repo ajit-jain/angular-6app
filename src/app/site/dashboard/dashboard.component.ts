@@ -95,11 +95,11 @@ export class DashboardComponent implements OnInit {
       return d;
     });
     const sortedArray = data.sort(function (a, b) {
-      return new Date(b.time) - new Date(a.time);
+      return Number(new Date(b.time)) - Number(new Date(a.time));
     });
     return sortedArray.filter(d => {
-      const diff = (d.time - this.dateFilter.firstDay);
-      const diff2 = (d.time - this.dateFilter.lastDay);
+      const diff = (d.time - Number(new Date(this.dateFilter.firstDay)));
+      const diff2 = (d.time - Number(new Date(this.dateFilter.lastDay)));
       return (diff >= 0 && diff2 <= 0);
     });
   }
