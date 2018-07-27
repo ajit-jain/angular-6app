@@ -12,7 +12,7 @@ export class AddSplitiiComponent implements OnInit {
   @ViewChild('nextBtn') nextBtn: ElementRef;
 
   @ViewChild('splitiiModal') splitiiModal: ElementRef;
-  constructor(private _userService: UserService,
+  constructor(public _userService: UserService,
     private _fb: FormBuilder) { }
   share = 0;
 

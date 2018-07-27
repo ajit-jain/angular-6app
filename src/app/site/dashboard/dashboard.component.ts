@@ -15,7 +15,7 @@ declare var moment: any;
 })
 export class DashboardComponent implements OnInit {
   selectedDates = [];
-  constructor(private _userService: UserService,
+  constructor(public _userService: UserService,
     private db: AngularFirestore,
     private cookieService: CookieService) {
 
@@ -128,23 +128,31 @@ export class DashboardComponent implements OnInit {
     let arr = Object.keys(obj).map((key) => {
       return { key, amount: obj[key] };
     });
-    if (arr.length && arr[0]['amount'] > arr[1]['amount']) {
+    if (arr.length > 1 && arr[0]['amount'] > arr[1]['amount']) {
       return ({
         creditor: arr[1]['key'],
         debitor: arr[0]['key'],
         amountLeft: arr[0]['amount'] - arr[1]['amount']
       });
-    } else if (arr.length && arr[1]['amount'] > arr[0]['amount']) {
+    } else if (arr.length > 1 && arr[1]['amount'] > arr[0]['amount']) {
       return ({
         creditor: arr[0]['key'],
         debitor: arr[1]['key'],
         amountLeft: arr[1]['amount'] - arr[0]['amount']
       });
-    } else if (arr.length && arr[1]['amount'] === arr[0]['amount']) {
+    } else if (arr.length > 1 && arr[1]['amount'] === arr[0]['amount']) {
       return ({
         creditor: arr[0]['key'],
         debitor: arr[1]['key'],
         amountLeft: arr[1]['amount'] - arr[0]['amount']
+      });
+    } else if (arr.length === 1) {
+      return ({
+        creditor: (arr[0]['key'] === this._userService.user['email']) ?
+          this._userService.user['partner_email'] :
+          this._userService.user['email'],
+        debitor: arr[0]['key'],
+        amountLeft: arr[0]['amount']
       });
     } else {
       return ({
