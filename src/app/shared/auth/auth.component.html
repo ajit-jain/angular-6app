@@ -5,8 +5,8 @@
   </h2>
 
   <splitii-signup *ngIf="authType=='signup'" (modifyAuthType)="changeAuthType($event)"
-  (userCreated)="redirectToSite($evrnt)"></splitii-signup>
+  (userCreated)="redirectToSite($event)"></splitii-signup>
   <splitii-login *ngIf="authType=='login'" (modifyAuthType)="changeAuthType($event)"
-  (userLoggedIn)="redirectToSite($evrnt)"></splitii-login>
+  (userLoggedIn)="redirectToSite($event)"></splitii-login>
 
 </div>

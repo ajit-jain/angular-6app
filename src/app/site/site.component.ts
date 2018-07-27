@@ -1,3 +1,5 @@
+import { UserService } from './../shared/services/user.service';
+import { CookieService } from './../shared/services/cookie.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -24,5 +26,4 @@ export class SiteComponent implements OnInit {
       this._router.navigate(['/site/dashboard']);
     }
   }
-
 }

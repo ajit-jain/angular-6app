@@ -1,6 +1,8 @@
+import { UserService } from './../services/user.service';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -9,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   authType: String = 'signup';
-  constructor(private _cookieService:CookieService,private _router:Router) { }
-
+  constructor(private _cookieService: CookieService, private _router: Router,
+    private authService: AuthService, private _userService: UserService) { }
+  error: string;
   ngOnInit() {
 
   }
@@ -18,7 +21,7 @@ export class AuthComponent implements OnInit {
     this.authType = type;
   }
   redirectToSite(details) {
-    this._cookieService.createCookie('token', btoa(JSON.stringify(details)), 3);
+    this._cookieService.createCookie('token', btoa(`${details['email']}:${details['id']}`), 3);
     this._router.navigate(['/site']);
   }
 }

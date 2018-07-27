@@ -1,4 +1,9 @@
 <form id="signup" [formGroup]="signupForm" (ngSubmit)="createAccount(signupForm.value)">
+  <div *ngIf="error">
+ <small  class="form-text text-muted">
+        {{error}}
+    </small>
+  </div>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="nameHelpBlock">
@@ -33,7 +38,7 @@
     </div>
   </div>
 
-  <button type="submit" class="btn mb-2" [disabled]="!signupForm.valid">Create Account</button>
+  <button type="submit" #btnRef class="btn mb-2" [disabled]="!signupForm.valid">Create Account</button>
   <div>Already have account?
     <a href="javascript::void(0)" (click)="changeAuthType('login')">Log in</a>
   </div>

@@ -1,3 +1,6 @@
+import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
+import { environment } from './../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { LoginGuard } from './shared/guards/login.guard';
@@ -12,6 +15,7 @@ import { AppComponent } from './app.component';
 import { ModuleWithProviders } from '@angular/core';
 import { AuthComponent } from 'src/app/shared/auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
 const routing: Routes = [
   {
     path: '',
@@ -34,9 +38,10 @@ const routes: ModuleWithProviders = RouterModule.forRoot(routing);
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

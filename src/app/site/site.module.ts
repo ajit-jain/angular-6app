@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IgxCalendarModule } from 'igniteui-angular';
 import { AddSplitiiComponent } from './add-splitii/add-splitii.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 const routing: Routes = [
   {
     path: '',
@@ -29,9 +30,10 @@ const routes: ModuleWithProviders = RouterModule.forChild(routing);
     routes,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFirestoreModule
   ],
-
+  exports: [AddSplitiiComponent],
   declarations: [SiteComponent, DashboardComponent, SettingsComponent, AddSplitiiComponent],
 })
 export class SiteModule { }

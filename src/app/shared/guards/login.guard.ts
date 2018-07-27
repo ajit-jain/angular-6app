@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
@@ -7,7 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(private _cookieService: CookieService, private router: Router) { }
+  constructor(private _cookieService: CookieService, private router: Router,
+    private authService: AuthService) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

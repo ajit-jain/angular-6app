@@ -1,18 +1,18 @@
-<div  id="settings" class="row" style="padding: 40px;">
+<div  id="settings" class="row" style="padding: 40px;" *ngIf="_userService.user['email']">
   <div class="col-1 col-md-1"></div>
   <div class="col-10 col-md-10">
 
     <form [formGroup]="settingsForm">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="nameHelpBlock">
+        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="nameHelpBlock" readonly>
         <div class="form-control-feedback" *ngIf="settingsForm.get('name').errors && (settingsForm.get('name').dirty || settingsForm.get('name').touched)">
           <p *ngIf="settingsForm.get('name').errors.required">name is required</p>
         </div>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock">
+        <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock" readonly>
         <div class="form-control-feedback" *ngIf="settingsForm.get('email').errors && (settingsForm.get('email').dirty || settingsForm.get('email').touched)">
           <p *ngIf="settingsForm.get('email').errors.required">email is required</p>
           <p *ngIf="settingsForm.get('email').errors.email">enter valid email</p>
@@ -20,7 +20,7 @@
       </div>
       <div class="form-group">
         <label for="partner_email">Patner's email</label>
-        <input type="partner_email" id="partner_email" class="form-control" formControlName="partner_email" aria-describedby="partner_emailHelpBlock">
+        <input type="partner_email" id="partner_email" class="form-control" formControlName="partner_email" aria-describedby="partner_emailHelpBlock" readonly>
         <div class="form-control-feedback" *ngIf="settingsForm.get('partner_email').errors && (settingsForm.get('partner_email').dirty || settingsForm.get('partner_email').touched)">
           <p *ngIf="settingsForm.get('partner_email').errors.required">partner_email is required</p>
         </div>

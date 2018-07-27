@@ -1,3 +1,4 @@
+import { UserService } from './../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/shared/services/cookie.service';
@@ -10,15 +11,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
-  constructor(private _cookieService: CookieService, private router: Router, private _fb: FormBuilder) { }
+  constructor(private _cookieService: CookieService, private router: Router,
+    private _fb: FormBuilder, public _userService: UserService) { }
 
   ngOnInit() {
-    this.settingsForm = this._fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      partner_email: ['', [Validators.required, Validators.email]],
-      name: ['',[Validators.required]],
-      // currency: ['',[Validators.required]]
+    this._userService.userData.subscribe((data) => {
+      if (data) {
+        this.settingsForm = this._fb.group({
+          email: [data['email'], [Validators.required, Validators.email]],
+          partner_email: [data['partner_email'], [Validators.required, Validators.email]],
+          name: [data['name'], [Validators.required]]
+        });
+      }
     });
+
   }
   logout() {
     this._cookieService.eraseCookie('token');

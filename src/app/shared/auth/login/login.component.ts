@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -11,8 +12,8 @@ export class LoginComponent implements OnInit {
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
   loginForm: FormGroup;
-  constructor(private _fb: FormBuilder) { }
-
+  constructor(private _fb: FormBuilder, private _userService: UserService) { }
+  error = '';
   ngOnInit() {
     this.loginForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -22,7 +23,18 @@ export class LoginComponent implements OnInit {
   changeAuthType(type) {
     this.modifyAuthType.emit(type);
   }
-  login(formDetails) {
-    this.userLoggedIn.emit(formDetails);
+  async login(formDetails) {
+    this.error = '';
+    try {
+      const userData = await this._userService.getUser(formDetails['email']);
+      if (userData) {
+        this._userService.user = userData.data();
+        this.userLoggedIn.emit(Object.assign(formDetails, { id: userData.id }));
+      } else {
+        this.error = 'Email not registered.. Please Signup';
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

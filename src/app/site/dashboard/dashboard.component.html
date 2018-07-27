@@ -1,12 +1,14 @@
-<div id="dashboard">
+<div id="dashboard" *ngIf="_userService.user['email']">
     <div class="outer" style="padding:30px">
     <div id="leftDiv" class="text-center">
-      <button type="button" class="btn1">This Month</button>
+      <button type="button" class="btn1" (click)="setMonthFilter()">This Month</button>
 
     </div>
     <div id="rightDiv">
       <!-- <button type="button" class="btn1">Custom</button> -->
-      <button type="button" class="btn1" data-toggle="modal" data-target="#customDate">Custom</button>
+      <button type="button" class="btn1" (click)="initializeCalender()" data-toggle="modal" data-target="#customDate">
+        {{selectedDates.length > 0 ? (mt(selectedDates[0]).format('MMM DD')  + ' - ' + mt(selectedDates[selectedDates.length-1]).format('MMM DD')) : 'Custom'}}
+      </button>
 
       <!-- Modal -->
       <div id="customDate" class="modal fade" role="dialog">
@@ -28,18 +30,18 @@
               position: relative;
               float: left;
               margin: 0;
-              padding: 15px;">jan 1 - EndDate</h4>
+              padding: 15px;">{{mt(selectedDates[0]).format('MMM DD') }} - {{ (selectedDates.length >1)? mt(selectedDates[selectedDates.length-1]).format('MMM DD') : 'End Date'}}</h4>
               
             </div>
             <div class="modal-body">
 
-              <igx-calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
+              <igx-calendar #calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
             </div>
             <div class="modal-footer" style="margin:0;padding:0">
               <button type="button" class="btn btn-default"
               style="position: relative;
               float: left;
-              width: 100%;" data-dismiss="modal">Close</button>
+              width: 100%;" data-dismiss="modal" (click)="getDates(selectedDates)">Done</button>
             </div>
           </div>
 
@@ -51,29 +53,31 @@
     </div>
     <div class="outer"  style="background-color:#F7F7F7;padding: 20px 20px 0 60px;">
     <p class="heading"> Total expenses</p>
-    <h2 style="margin:0">$17822.00</h2>
-    <p style="padding:10px 0 0px 27px;"> Robert ownes jeniffer $40</p>
-    </div>
+    <h2 style="margin:0">${{expenses?.total_expenses}}</h2>
+    <p style="padding:10px 0 0px 27px;" [hidden]="!expenses['debitor']"> {{ expenses.debitor }} ownes {{ expenses.creditor }} $ {{ expenses.amountLeft}}</p>
+    <p style="padding:10px 0 0px 27px;" [hidden]="expenses['debitor']">  nothing to settle down </p>
+    
+  </div>
   
   <div class="outer"  id="payments" style="padding:10px">
     <div class="outer" *ngFor="let payment of payments;let i=index">
       <div style="float:left;">
-        <p>{{payment.createdAt}}</p>
-        <p>{{ payment.paid.description}}</p>
-        <p>Paid by {{ payment.paid.by}}</p>
+        <p>{{ mt(payment.time).format('MMM DD')}}</p>
+        <p>{{ payment.label}}</p>
+        <p>Paid by {{ payment.paidBy}}</p>
       </div>
       <div style="float:right;">
-        <p>
-          <label style="padding: 10px;font-size: 15px;font-family:Montserrat">${{payment.amount}}</label>
-          <a data-toggle="collapse" [id]="parent+'payment._id'" [href]="'#'+payment._id" (click)="toggleIcon($event,'icon'+payment._id)"
+        <p style="text-align:right">
+          <label style="padding: 10px;font-size: 15px;font-family:Montserrat;">${{payment.totalAmount}}</label>
+          <a data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" (click)="toggleIcon($event,'icon_'+payment.id)"
             role="button" aria-expanded="false">
-            <i [id]="'icon'+payment._id" class="fas fa-caret-down" style="font-size:12px"></i>
+            <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i>
           </a>
         </p>
-        <div class="collapse" [id]="payment._id">
-          <p>{{payment.breakDowns[0].user}}:${{payment.breakDowns[0].share}}</p>
+        <div class="collapse" [id]="'collapse_'+payment.id">
+          <p>{{payment.split[0].email}}:${{payment.split[0].amount}}</p>
           <p></p>
-          <p>{{payment.breakDowns[1].user}}:${{payment.breakDowns[1].share}}</p>
+          <p>{{payment.split[1].email}}:${{payment.split[1].amount}}</p>
         </div>
       </div>
       <br style="clear: both" />
