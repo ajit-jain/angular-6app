@@ -1,7 +1,7 @@
 <form id="signup" [formGroup]="signupForm" (ngSubmit)="createAccount(signupForm.value)">
   <div *ngIf="error">
- <small  class="form-text text-muted">
-        {{error}}
+    <small class="form-text text-muted">
+      {{error}}
     </small>
   </div>
   <div class="form-group">
@@ -18,7 +18,7 @@
     <input type="text" id="email" class="form-control" formControlName="email" aria-describedby="emailHelpBlock">
     <div class="form-control-feedback" *ngIf="signupForm.get('email').errors && (signupForm.get('email').dirty || signupForm.get('email').touched)">
       <p *ngIf="signupForm.get('email').errors.required">email is required</p>
-      <p *ngIf="signupForm.get('email').errors.email">enter valid email</p>      
+      <p *ngIf="signupForm.get('email').errors.email">enter valid email</p>
     </div>
   </div>
   <div class="form-group">
@@ -33,13 +33,16 @@
     <input type="text" id="partner-email" class="form-control" formControlName="partner_email" aria-describedby="partnerEmailHelpBlock">
     <div class="form-control-feedback" *ngIf="signupForm.get('partner_email').errors && (signupForm.get('partner_email').dirty || signupForm.get('partner_email').touched)">
       <p *ngIf="signupForm.get('partner_email').errors.required">partner email is required</p>
-      <p *ngIf="signupForm.get('partner_email').errors.email">enter valid email</p>      
-      
+      <p *ngIf="signupForm.get('partner_email').errors.email">enter valid email</p>
+
     </div>
   </div>
+  <div class="btnClass">
+    <button type="submit" #btnRef class="btn1 text-center" [disabled]="!signupForm.valid">Create Account</button>
 
-  <button type="submit" #btnRef class="btn mb-2" [disabled]="!signupForm.valid">Create Account</button>
-  <div>Already have account?
+  </div>
+  <div class="formFooter">
+    <span>Already have account?  </span>
     <a href="javascript::void(0)" (click)="changeAuthType('login')">Log in</a>
   </div>
 </form>

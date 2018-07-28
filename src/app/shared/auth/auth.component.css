@@ -1,0 +1,10 @@
+.logo{
+    text-align: center;
+}
+.logo img{
+    width: 144px;
+    height: 59px;
+}
+.auth{
+    padding: 23px;
+}

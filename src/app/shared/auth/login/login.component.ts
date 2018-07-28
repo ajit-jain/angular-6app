@@ -1,5 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   @Output() modifyAuthType: EventEmitter<any> = new EventEmitter<any>();
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild('btnRef') btnRef: ElementRef;
 
   loginForm: FormGroup;
   constructor(private _fb: FormBuilder, private _userService: UserService) { }
@@ -25,6 +26,9 @@ export class LoginComponent implements OnInit {
   }
   async login(formDetails) {
     this.error = '';
+
+    this.btnRef.nativeElement.textContent = 'Please Wait...';
+    this.btnRef.nativeElement.disabled = true;
     try {
       const userData = await this._userService.getUser(formDetails['email']);
       if (userData) {
@@ -35,6 +39,9 @@ export class LoginComponent implements OnInit {
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      this.btnRef.nativeElement.textContent = 'Log In';
+      this.btnRef.nativeElement.disabled = false;
     }
   }
 }

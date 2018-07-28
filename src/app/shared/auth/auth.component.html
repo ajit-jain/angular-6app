@@ -1,12 +1,14 @@
-<div>
-  <h2 style="text-align: center;font-weight:700;">
+<div class="auth">
+  <!-- <h2 style="text-align: center;font-weight:700;">
     <span style="color:#6B26F4">Split</span>
     <span style="color:#4C4C4C">ii</span>
-  </h2>
+  </h2> -->
+  <figure class="logo">
+    <img [src]="'assets/images/Splitii-blue.svg'" class="logo" alt="logo">
 
-  <splitii-signup *ngIf="authType=='signup'" (modifyAuthType)="changeAuthType($event)"
-  (userCreated)="redirectToSite($event)"></splitii-signup>
-  <splitii-login *ngIf="authType=='login'" (modifyAuthType)="changeAuthType($event)"
-  (userLoggedIn)="redirectToSite($event)"></splitii-login>
+  </figure>
+
+  <splitii-signup *ngIf="authType=='signup'" (modifyAuthType)="changeAuthType($event)" (userCreated)="redirectToSite($event)"></splitii-signup>
+  <splitii-login *ngIf="authType=='login'" (modifyAuthType)="changeAuthType($event)" (userLoggedIn)="redirectToSite($event)"></splitii-login>
 
 </div>

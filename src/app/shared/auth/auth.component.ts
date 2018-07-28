@@ -1,3 +1,4 @@
+
 import { UserService } from './../services/user.service';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,5 +24,6 @@ export class AuthComponent implements OnInit {
   redirectToSite(details) {
     this._cookieService.createCookie('token', btoa(`${details['email']}:${details['id']}`), 3);
     this._router.navigate(['/site']);
+    this._userService.userData.next(this._userService.user);
   }
 }

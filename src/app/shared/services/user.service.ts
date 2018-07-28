@@ -22,6 +22,11 @@ export class UserService {
   }
   async createUser(details) {
     details['createdAt'] = firebase.firestore.FieldValue.serverTimestamp();
+    details['currency'] = {
+      'symbol': '$',
+      'name': 'US Dollar',
+      'code': 'USD',
+    };
     return (await this.db.collection('users').add(details));
   }
   async addSplitii(data) {

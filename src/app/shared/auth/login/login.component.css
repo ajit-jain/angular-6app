@@ -1,0 +1,51 @@
+#login .form-group{
+    margin-bottom: 25px;
+}
+#login .form-group label {
+  margin-bottom: 0;
+  font-family: Open Sans, Regular;
+  font-size: 0.9rem;
+  color: #000000;
+  opacity: 0.5;
+}
+
+#login .form-group input {
+  background-color: #F7F7F7;
+}
+
+#login input:focus {
+  outline: none;
+}
+
+#login .btnClass {
+  text-align: center;
+}
+
+#login .btn1 {
+  font-family: Open Sans, Bold;
+  font-size: 1rem;
+  border: 0;
+  color: #FFFFFF;
+  border-radius: 40px;
+  background: #9A9A9A;
+  padding: 10px 19px;
+}
+
+#login .formFooter {
+  padding: 15px;
+  text-align: center;
+}
+
+#login .formFooter span {
+  color: #000000;
+  opacity: 0.8;
+}
+
+#login .formFooter a {
+  font-weight: 700;
+  text-decoration: none;
+  color: #4877EF;
+}
+#login .form-group .error {
+    color: #FF6737;
+}
