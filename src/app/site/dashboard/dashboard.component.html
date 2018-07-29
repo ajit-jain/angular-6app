@@ -90,37 +90,45 @@
           <br style="clear:both" />
 
           <div class="outer icons">
-            <div class="payment-details delete-icon"><img [src]="'assets/images/delete.svg'"><span>Delete</span></div>
-            <div class="payment-details edit-icon"><img [src]="'assets/images/edit.svg'"><span>Edit</span></div>            
+            <div class="payment-details delete-icon" (click)="openModal(payment)">
+              <img [src]="'assets/images/delete.svg'">
+              <span>Delete</span>
+            </div>
+            <div class="payment-details edit-icon">
+              <img [src]="'assets/images/edit.svg'">
+              <span>Edit</span>
+            </div>
           </div>
         </div>
         <br style="clear:both" />
       </div>
       <div class="bottom-line" *ngIf="!(i==(payments.length-1))"></div>
     </div>
-    <!-- <div class="outer" *ngFor="let payment of payments;let i=index">
-      <div style="float:left;">
-        <p>{{ mt(payment.time).format('MMM DD')}}</p>
-        <p>{{ payment.label}}</p>
-        <p>Paid by {{ payment.paidBy}}</p>
-      </div>
-      <div style="float:right;">
-        <p style="text-align:right">
-          <label style="padding: 10px;font-size: 15px;font-family:Montserrat;">${{payment.totalAmount}}</label>
-          <a data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" (click)="toggleIcon($event,'icon_'+payment.id)"
-            role="button" aria-expanded="false">
-            <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i>
-          </a>
-        </p>
-        <div class="collapse" [id]="'collapse_'+payment.id">
-          <p>{{payment.split[0].email}}:${{payment.split[0].amount}}</p>
-          <p></p>
-          <p>{{payment.split[1].email}}:${{payment.split[1].amount}}</p>
-        </div>
-      </div>
-      <br style="clear: both" />
-      <hr *ngIf="!(i==(payments.length-1))">
-    </div> -->
   </div>
 
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true" id="delete-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content shadow">
+      <div class="modal-header">
+        <button type="button" class="close restrictPadding" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4 class="label">Are you sure you want to delete?</h4>
+        <div class="details">
+          <p>{{ mt(selectedPayment.time).format('MMM DD')}}</p>
+          <p>${{selectedPayment.totalAmount}}</p>
+          <p>{{ selectedPayment.label}}</p>
+        </div>
+      </div>
+      <div class="modal-footer deleteFooter">
+        <button type="button" class="btn1" >Cancel</button>
+        <button type="button" class="btn1 active" >Delete</button>
+
+      </div>
+    </div>
+  </div>
 </div>

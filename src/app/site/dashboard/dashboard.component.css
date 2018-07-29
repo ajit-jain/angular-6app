@@ -173,11 +173,13 @@ h1 {
 #payments .icons .delete-icon {
   color: #000000;
   opacity: 0.5;
+  cursor: pointer;
 }
 #payments .icons .edit-icon {
   color: #4877EF;
   padding-right: 25px;
   text-align: right;
+  cursor: pointer;
 }
 #payments .icons .delete-icon img {
   width: 20px;
@@ -197,6 +199,56 @@ h1 {
   font-size: 0.6rem;
 } */
 
+#delete-modal .shadow{
+  box-shadow: 0 0 0 #000000;
+  border-radius: 0 !important;
+}
+#delete-modal .restrictPadding{
+  padding: 0.5rem !important;
+}
+#delete-modal .deleteFooter{
+  border: 0 !important;
+  width: 70%;
+  margin: auto;
+}
+#delete-modal .label{
+  width: 80%;
+  font-family: Open Sans, Bold;
+  margin: 0 auto;
+  color: #000000;
+  opacity: 0.8;
+  font-size: 1.2rem;
+}
+#delete-modal .modal-body {
+  border: 0!important;
+}
+#delete-modal .details{
+  padding: 0;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Open Sans, Regular;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+#delete-modal .details p {
+  line-height: 1.5;
+  margin: 0;
+}
+#delete-modal .btn1{
+  width: 50%;
+  font-family: Open Sans, Bold;
+  font-size: 0.9rem;
+  color: white;
+  opacity: 1;
+  border: 0;
+  border-radius: 40px;
+  background: #9A9A9A;
+  padding: 7px 10px;
+}
+#delete-modal .btn1.active{
+  background: #FF4E37;
+}
 @media screen and (max-width: 767px) {
   #dashboard .expenses-center {
     width: 80%;

@@ -10,15 +10,13 @@
     </div>
   </main>
   <footer>
-    <div *ngIf="isUserLoggedIn()" class="row fixed-footer">
+    <div *ngIf="isUserLoggedIn() && !isHideBar" class="row fixed-footer">
       <div class="col-md-2"></div>
       <div class="col-12 col-md-8" id="footerDiv">
         <div style="float:left;">
           <span>
             <a [routerLink]="['/site/dashboard']">
               <i class="fas fa-chart-bar"></i>
-
-
             </a>
           </span>
         </div>
@@ -27,7 +25,7 @@
             <!-- <a data-toggle="modal" style="cursor:pointer;" data-target="#splitiiModal">
               <i class="fas fa-plus-circle"></i>
             </a> -->
-            <a data-toggle="modal" style="cursor:pointer;" [routerLink]="['/site/addSplitii']">
+            <a data-toggle="modal" style="cursor:pointer;" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
               <i class="fas fa-plus-circle"></i>
             </a>
           </span>

@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { AuthGuard } from './../shared/guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
@@ -31,7 +32,8 @@ const routes: ModuleWithProviders = RouterModule.forChild(routing);
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    SharedModule
   ],
   exports: [AddSplitiiComponent],
   declarations: [SiteComponent, DashboardComponent, SettingsComponent, AddSplitiiComponent],

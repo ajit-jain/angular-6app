@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class UserService {
   constructor(private db: AngularFirestore) { }
   user = {};
+  selectedPayment: any;
   userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   async getUser(email) {
     try {

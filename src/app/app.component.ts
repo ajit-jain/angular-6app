@@ -4,6 +4,7 @@ import { CookieService } from './shared/services/cookie.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   token = '';
-  constructor(private _cookieService: CookieService,
+  isHideBar = false;
+  constructor(private _cookieService: CookieService, private activeRoute: ActivatedRoute,
     private _userService: UserService, private router: Router, private sanitizer: DomSanitizer) {
 
   }
@@ -21,10 +23,17 @@ export class AppComponent implements OnInit {
     if (this.token && !this._userService.user['email']) {
       this.setUser();
     }
-
     // if (token) {
     //   window.location.href = `${environment.APP_PROTOCOL}${environment.APP_EXTENSION}/dashboard`; 
     // }
+    this.router.events.subscribe((event) => {
+      if (location.pathname.includes('/site/addSplitii')) {
+        this.isHideBar = true;
+      } else {
+        this.isHideBar = false;
+      }
+    });
+
   }
   isUserLoggedIn() {
     return this._cookieService.readCookie('token');
@@ -37,7 +46,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-  transform(html){
+  transform(html) {
     return this.sanitizer.bypassSecurityTrustUrl(html);
   }
 }

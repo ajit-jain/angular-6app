@@ -8,6 +8,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { merge, combineLatest } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 declare var moment: any;
+declare var jQuery: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,6 +17,7 @@ declare var moment: any;
 })
 export class DashboardComponent implements OnInit {
   selectedDates = [];
+  selectedPayment = {};
   constructor(public _userService: UserService,
     private db: AngularFirestore,
     private cookieService: CookieService) {
@@ -199,5 +202,10 @@ export class DashboardComponent implements OnInit {
     this.initializeThisMonth();
     this.selectedDates = [];
     this.setPayments(this.allPayMents);
+  }
+  openModal(payment) {
+    this._userService.selectedPayment = payment;
+    this.selectedPayment = payment;
+    jQuery('#delete-modal').modal('show');
   }
 }

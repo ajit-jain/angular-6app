@@ -1,67 +1,65 @@
 <!-- <div *ngIf="_userService.user['email']" id="splitiiModal" class="modal fade" role="dialog"> -->
 <div *ngIf="_userService.user['email']" id="splitiiModal" class="outer">
   <div class="head">
-      <a class="back-button" href="javascript::void(0)" (click)="back()">
+    <a class="back-button" href="javascript::void(0)" (click)="back()">
       <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </a>
+    <a [routerLink]="['/site/dashboard']" class="close closeButton-2">&times;</a>
   </div>
   <div class="outer">
-      <form [formGroup]="addSplitiiForm" class="splitiiForm">
-          <div class="step1" *ngIf="activeStep==1">
-            <p class="label">Total Amount</p>
-            <input  type="number" formControlName="totalAmount" placeholder="$00.00"
-            />
-            <div class="form-control-feedback" *ngIf="addSplitiiForm.get('totalAmount').errors && (addSplitiiForm.get('totalAmount').dirty || addSplitiiForm.get('totalAmount').touched)">
-              <p class="error" *ngIf="addSplitiiForm.get('totalAmount').errors.required">Please enter amount</p>
-            </div>
-          </div>
-          <div class="step2" *ngIf="activeStep==2">
-            <div class="labelClass">
-              <p class="label">What is this for?</p>
-              <input type="text" formControlName="label"
-              />
-              <div class="form-control-feedback" *ngIf="addSplitiiForm.get('label').invalid && (addSplitiiForm.get('label').dirty || addSplitiiForm.get('label').touched)">
-                <p class="error" *ngIf="addSplitiiForm.get('label').errors.required">Please enter label</p>
-              </div>
-            </div>
-            <div class="switch-field marginUp">
-              <p class="label">Paid By:</p>
-              <input type="radio" id="switch_left" name="paidBy" formControlName="paidBy" [value]="addSplitiiForm.get('name').value" [checked]="true"
-              />
-              <label for="switch_left">{{addSplitiiForm.get('name').value}}</label>
-              <input type="radio" id="switch_right" name="paidBy" formControlName="paidBy" [value]="addSplitiiForm.get('partner_name').value"
-              />
-              <label for="switch_right">{{addSplitiiForm.get('partner_name').value}}</label>
-            </div>
-          </div>
-          <div *ngIf="activeStep==3" class="step3">
-
-            <div class="switch-field" >
-              <p class="label">Split ?</p>
-              <input type="radio" id="switch_left" name="isHalf" formControlName="isHalf" [value]="true" />
-              <label for="switch_left">50/50</label>
-              <input type="radio" id="switch_right" name="isHalf" formControlName="isHalf" [value]="false" />
-              <label for="switch_right">By Amount</label>
-            </div>
-            <div class="byAmount" *ngIf="!this.addSplitiiForm.get('isHalf').value">
-              <input type="number" formControlName="share"  placeholder="$00.00"
-              [max]="addSplitiiForm.get('totalAmount').value" (keyup)="verifyAmount($event,addSplitiiForm.get('totalAmount').value)"
-              />
-            </div>
-            <div class="breakDowns">
-              <p class="label">The breakdown</p>
-              <p>{{ addSplitiiForm.get('name').value }}: $ {{ addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
-                : addSplitiiForm.get('share').value }}</p>
-              <p>{{ addSplitiiForm.get('partner_name').value }} : $ {{ addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
-                : (addSplitiiForm.get('totalAmount').value - addSplitiiForm.get('share').value ) }}</p>
-            </div>
-          </div>
-          
-          
-        </form>
-        <div (click)="next()" class="outer btnBack">
-            <button #nextBtn type="button" class="btnClass">Next</button>
+    <form [formGroup]="addSplitiiForm" class="splitiiForm">
+      <div class="step1" *ngIf="activeStep==1">
+        <p class="label">Total Amount</p>
+        <input type="number" appAutofocus formControlName="totalAmount" placeholder="$00.00" />
+        <div class="form-control-feedback" *ngIf="addSplitiiForm.get('totalAmount').errors && (addSplitiiForm.get('totalAmount').dirty || addSplitiiForm.get('totalAmount').touched)">
+          <p class="error" *ngIf="addSplitiiForm.get('totalAmount').errors.required">Please enter amount</p>
         </div>
+      </div>
+      <div class="step2" *ngIf="activeStep==2">
+        <div class="labelClass">
+          <p class="label">What is this for?</p>
+          <input type="text" formControlName="label" appAutofocus />
+          <div class="form-control-feedback" *ngIf="addSplitiiForm.get('label').invalid && (addSplitiiForm.get('label').dirty || addSplitiiForm.get('label').touched)">
+            <p class="error" *ngIf="addSplitiiForm.get('label').errors.required">Please enter label</p>
+          </div>
+        </div>
+        <div class="switch-field marginUp">
+          <p class="label">Paid By:</p>
+          <input type="radio" id="switch_left" name="paidBy" formControlName="paidBy" [value]="addSplitiiForm.get('name').value" [checked]="true"
+          />
+          <label for="switch_left">{{addSplitiiForm.get('name').value}}</label>
+          <input type="radio" id="switch_right" name="paidBy" formControlName="paidBy" [value]="addSplitiiForm.get('partner_name').value"
+          />
+          <label for="switch_right">{{addSplitiiForm.get('partner_name').value}}</label>
+        </div>
+      </div>
+      <div *ngIf="activeStep==3" class="step3">
+
+        <div class="switch-field">
+          <p class="label">Split ?</p>
+          <input type="radio" id="switch_left" name="isHalf" formControlName="isHalf" [value]="true" />
+          <label for="switch_left">50/50</label>
+          <input type="radio" id="switch_right" name="isHalf" formControlName="isHalf" [value]="false" />
+          <label for="switch_right">By Amount</label>
+        </div>
+        <div class="byAmount" *ngIf="!this.addSplitiiForm.get('isHalf').value">
+          <input type="number" appAutofocus formControlName="share" placeholder="$00.00" [max]="addSplitiiForm.get('totalAmount').value" (keyup)="verifyAmount($event,addSplitiiForm.get('totalAmount').value)"
+          />
+        </div>
+        <div class="breakDowns">
+          <p class="label">The breakdown</p>
+          <p>{{ addSplitiiForm.get('name').value }}: $ {{ addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
+            : addSplitiiForm.get('share').value }}</p>
+          <p>{{ addSplitiiForm.get('partner_name').value }} : $ {{ addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
+            : (addSplitiiForm.get('totalAmount').value - addSplitiiForm.get('share').value ) }}</p>
+        </div>
+      </div>
+
+
+    </form>
+    <div (click)="next()" class="outer btnBack">
+      <button #nextBtn type="button" class="btnClass">Next</button>
+    </div>
   </div>
   <!-- <div class="modal-dialog">
 

@@ -6,6 +6,7 @@ import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  declarations: [SignupComponent, LoginComponent, AuthComponent],
-  exports: [AuthComponent]
+  declarations: [SignupComponent, LoginComponent, AuthComponent, AutofocusDirective],
+  exports: [AuthComponent, AutofocusDirective]
 })
 export class SharedModule { }

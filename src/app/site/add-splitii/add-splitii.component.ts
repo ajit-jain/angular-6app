@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class AddSplitiiComponent implements OnInit {
 
   @ViewChild('splitiiModal') splitiiModal: ElementRef;
   constructor(public _userService: UserService,
-    private _fb: FormBuilder) { }
+    private _fb: FormBuilder, private _router: Router) { }
   share = 0;
 
   addSplitiiForm: FormGroup;
@@ -42,11 +43,10 @@ export class AddSplitiiComponent implements OnInit {
   setInitialSteps() {
     this.stepsCompleted = [1];
     this.activeStep = this.stepsCompleted[this.stepsCompleted.length - 1];
-
-
   }
   back() {
     if (this.activeStep === 1) {
+      this._router.navigate(['/site/dashboard']);
       return;
     }
     this.stepsCompleted.pop();
@@ -68,9 +68,9 @@ export class AddSplitiiComponent implements OnInit {
         this.nextBtn.nativeElement.textContent = 'Please Wait...';
         this.nextBtn.nativeElement.disabled = true;
         await this.addSplitii(this.addSplitiiForm.value);
-        this.modal.nativeElement.click();
         this.setInitialSteps();
         this.addSplitiiForm = this._fb.group(this.getSplitiiFormData(this._userService.user));
+        this._router.navigate(['site/dashboard']);
         return;
       }
       this.stepsCompleted.push(this.activeStep + 1);
