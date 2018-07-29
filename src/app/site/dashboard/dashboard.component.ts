@@ -17,7 +17,7 @@ declare var jQuery: any;
 })
 export class DashboardComponent implements OnInit {
   selectedDates = [];
-  selectedPayment = {};
+  selectedPayment: any = {};
   constructor(public _userService: UserService,
     private db: AngularFirestore,
     private cookieService: CookieService) {
@@ -207,5 +207,13 @@ export class DashboardComponent implements OnInit {
     this._userService.selectedPayment = payment;
     this.selectedPayment = payment;
     jQuery('#delete-modal').modal('show');
+  }
+  async deletePayment(payment){
+    try{
+      await this._userService.deletePayment(payment.id);
+    }catch(e){
+      console.log(e);
+    }
+
   }
 }

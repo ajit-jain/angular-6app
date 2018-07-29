@@ -67,4 +67,11 @@ export class UserService {
     }
 
   }
+  async deletePayment(id) {
+    try {
+      return await this.db.collection('expenses').doc(id).delete();
+    } catch (e) {
+      throw e;
+    }
+  }
 }

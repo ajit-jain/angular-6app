@@ -55,7 +55,7 @@ export class AddSplitiiComponent implements OnInit {
   async next() {
     console.log(this.addSplitiiForm.value);
     try {
-
+      window.scrollTo(0, 0);
       this.addSplitiiForm.controls['totalAmount'].markAsTouched({ onlySelf: true });
       this.addSplitiiForm.controls['paidBy'].markAsTouched({ onlySelf: true });
 
