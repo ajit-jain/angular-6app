@@ -45,3 +45,12 @@
     text-decoration: none;
     color: #4877EF;
 }
+#signup .form-group .error {
+  color: #FF6737;
+  font-family: Open Sans, Semibold;
+  font-size: 0.7rem
+}
+
+#signup .form-group .errorBorder {
+  border:1px solid #FF7043;
+}

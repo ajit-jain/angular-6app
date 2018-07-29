@@ -1,16 +1,144 @@
-#splitiiModal input[type=number]::-webkit-inner-spin-button, 
-#splitiiModal input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
+#splitiiModal input[type=number]::-webkit-inner-spin-button,
+#splitiiModal input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
-#splitiiModal input:focus{
+
+#splitiiModal input:focus {
   outline: none;
 }
-#splitiiModal p {
+
+#splitiiModal {
+  padding: 10px;
+}
+
+/* #splitiiModal p {
   margin:0;
   padding:0;
   font-size:9px;
   line-height: 1rem;
+} */
+
+#splitiiModal .head {
+  padding-left: 10px;
+}
+
+#splitiiModal .head .back-button {
+  color: #000000;
+  font-size: 1rem;
+}
+
+#splitiiModal .splitiiForm {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#splitiiModal .splitiiForm .step1 {
+  width: 80%;
+  margin: 0 auto;
+  padding: 60px 10px;
+}
+
+#splitiiModal .splitiiForm .step1 input {
+  border: 0;
+  width: 100%;
+  font-size: 3rem;
+  font-family: Montserrat;
+  caret-color: #544BF0;
+}
+
+#splitiiModal .splitiiForm .step1 .label {
+  font-family: Open Sans, Regular;
+  font-size: 0.6rem;
+  color: #000000;
+  opacity: 0.5;
+  margin: 0;
+}
+
+#splitiiModal .splitiiForm .step2 {
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px 10px;
+}
+
+#splitiiModal .splitiiForm .step2 .label {
+  font-family: Open Sans, Regular;
+  font-size: 0.6rem;
+  color: #000000;
+  opacity: 0.5;
+  margin: 0;
+}
+
+#splitiiModal .splitiiForm .step2 input {
+  border: 0;
+  border-bottom: 1px solid grey;
+  font-size: 1rem;
+  width: 100%;
+  font-family: Montserrat;
+}
+#splitiModal .splitiiForm .step2 .labelClass{
+  margin-bottom: 20px;
+}
+#splitiiModal .splitiiForm .step2 input:focus{
+  border-bottom: 1px solid #544BF0;
+}
+#splitiiModal .btnBack {
+  background-color: #4878EF;
+  padding: 10px;
+}
+
+#splitiiModal .btnClass {
+  width: 100%;
+  color: #FFFFFF;
+  font-family: Open Sans, Bold;
+  font-weight: 700;
+  border: 0;
+  background: transparent;
+  font-size: 1.1rem;
+}
+
+#splitiiModal .error {
+  color: #FF6737;
+  font-family: Open Sans, Semibold;
+  font-size: 0.7rem
+}
+#splitiiModal .step2 .marginUp{
+  margin-top: 20px;
+}
+#splitiiModal .splitiiForm .step3 {
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px 10px;
+}
+#splitiiModal .splitiiForm .step3 .breakDowns p{
+  font-family: Open Sans, Semibold;
+  color: #000000;
+  opacity: 0.8;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+
+}
+#splitiiModal .splitiiForm  .step3 .breakDowns p.label {
+  font-family: Open Sans, Regular;
+  font-size: 0.7rem;
+  color: #000000;
+  opacity: 0.5;
+  margin: 0;
+  line-height: 3;
+}
+#splitiiModal .splitiiForm .step3 .breakDowns{
+  margin-top: 25px;
+}
+#splitiiModal .splitiiForm .step3 .byAmount{
+  margin-top: 15px;
+}
+#splitiiModal .splitiiForm .step3 input {
+  border: 0;
+  width: 100%;
+  font-size: 3rem;
+  font-family: Montserrat;
+  caret-color: #544BF0;
 }

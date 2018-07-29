@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="text" id="email" class="form-control" 
+    <input type="text" id="email" class="form-control" [class.errorBorder]="loginForm.get('email').errors && (loginForm.get('email').dirty || loginForm.get('email').touched)"
       formControlName="email" aria-describedby="emailHelpBlock">
     <div class="form-control-feedback" *ngIf="loginForm.get('email').errors && (loginForm.get('email').dirty || loginForm.get('email').touched)">
       <p class="error" *ngIf="loginForm.get('email').errors.required">Please enter email</p>
@@ -15,9 +15,12 @@
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" id="password" class="form-control" formControlName="password" aria-describedby="passwordHelpBlock">
+    <input type="password" id="password" class="form-control" [class.errorBorder]="loginForm.get('password').errors && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+    formControlName="password" aria-describedby="passwordHelpBlock">
     <div class="form-control-feedback" *ngIf="loginForm.get('password').errors && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-      <p *ngIf="loginForm.get('password').errors.required">password is required</p>
+      <p class="error" *ngIf="loginForm.get('password').errors.required">Please enter password</p>
+      <p class="error" *ngIf="loginForm.get('password').errors.minlength">Password must be at least 6 characters long.</p>
+      
     </div>
   </div>
 <div class="btnClass">

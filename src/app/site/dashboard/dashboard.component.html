@@ -1,13 +1,14 @@
 <div id="dashboard" *ngIf="_userService.user['email']">
-    <div class="outer" style="padding:30px">
+  <div class="outer header">
     <div id="leftDiv" class="text-center">
-      <button type="button" class="btn1" (click)="setMonthFilter()">This Month</button>
+      <button type="button" class="btn1" [class.active]="!isMonthly" (click)="setMonthFilter()">This Month</button>
 
     </div>
     <div id="rightDiv">
       <!-- <button type="button" class="btn1">Custom</button> -->
-      <button type="button" class="btn1" (click)="initializeCalender()" data-toggle="modal" data-target="#customDate">
-        {{selectedDates.length > 0 ? (mt(selectedDates[0]).format('MMM DD')  + ' - ' + mt(selectedDates[selectedDates.length-1]).format('MMM DD')) : 'Custom'}}
+      <button type="button" class="btn1" [class.active]="isMonthly" (click)="initializeCalender();" data-toggle="modal" data-target="#customDate">
+        {{selectedDates.length > 0 ? (mt(selectedDates[0]).format('MMM DD') + ' - ' + mt(selectedDates[selectedDates.length-1]).format('MMM
+        DD')) : 'Custom'}}
       </button>
 
       <!-- Modal -->
@@ -23,23 +24,25 @@
               position: relative;
               float: left;
               margin: 0;
-              padding: 15px;"><a style="position: absolute;
+              padding: 15px;">
+                <a style="position: absolute;
               bottom: 1px;
-              left: 30px;">clear</a></div>
+              left: 30px;">clear</a>
+              </div>
               <h4 class="modal-title" style="width: 70%;
               position: relative;
               float: left;
               margin: 0;
-              padding: 15px;">{{mt(selectedDates[0]).format('MMM DD') }} - {{ (selectedDates.length >1)? mt(selectedDates[selectedDates.length-1]).format('MMM DD') : 'End Date'}}</h4>
-              
+              padding: 15px;">{{mt(selectedDates[0]).format('MMM DD') }} - {{ (selectedDates.length >1)? mt(selectedDates[selectedDates.length-1]).format('MMM
+                DD') : 'End Date'}}</h4>
+
             </div>
             <div class="modal-body">
 
               <igx-calendar #calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
             </div>
             <div class="modal-footer" style="margin:0;padding:0">
-              <button type="button" class="btn btn-default"
-              style="position: relative;
+              <button type="button" class="btn btn-default" style="position: relative;
               float: left;
               width: 100%;" data-dismiss="modal" (click)="getDates(selectedDates)">Done</button>
             </div>
@@ -50,17 +53,52 @@
       </div>
 
     </div>
-    </div>
-    <div class="outer"  style="background-color:#F7F7F7;padding: 20px 20px 0 60px;">
-    <p class="heading"> Total expenses</p>
-    <h2 style="margin:0">${{expenses?.total_expenses}}</h2>
-    <p style="padding:10px 0 0px 27px;" [hidden]="!expenses['debitor']"> {{ expenses.debitor }} ownes {{ expenses.creditor }} $ {{ expenses.amountLeft}}</p>
-    <p style="padding:10px 0 0px 27px;" [hidden]="expenses['debitor']">  nothing to settle down </p>
-    
   </div>
-  
-  <div class="outer"  id="payments" style="padding:10px">
-    <div class="outer" *ngFor="let payment of payments;let i=index">
+  <div class="outer expenses">
+    <div class="expenses-center">
+      <p class="head"> Total expenses</p>
+      <h1>${{expenses?.total_expenses}}</h1>
+
+      <p class="owes" [hidden]="!expenses['debitor']"> {{ expenses.debitor }} ownes {{ expenses.creditor }}
+        <span>$ {{ expenses.amountLeft}}</span>
+      </p>
+      <p class="owes" [hidden]="expenses['debitor']"> Nothing to settle down </p>
+    </div>
+
+  </div>
+
+  <div class="outer" id="payments" style="padding:10px">
+    <div *ngFor="let payment of payments;let i=index">
+      <div class="wrapper">
+        <p class="payment-date zeroMargin">{{ mt(payment.time).format('MMM DD')}}</p>
+        <div class="outer">
+          <div class="payment-details">
+            <p class="label zeroMargin">{{ payment.label}}</p>
+            <p class="paidBy zeroMargin">Paid by {{ payment.paidBy}}</p>
+          </div>
+          <div class="payment-details amount-right-pad">
+            <h6 class="amount">${{payment.totalAmount}}</h6>
+            <a class="payment-icon" data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" (click)="toggleIcon($event,'icon_'+payment.id)"
+              role="button" aria-expanded="false">
+              <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i>
+            </a>
+            <div class="collapse payment-splits" [id]="'collapse_'+payment.id">
+              <p>{{payment.split[0].email}}:${{payment.split[0].amount}}</p>
+              <p>{{payment.split[1].email}}:${{payment.split[1].amount}}</p>
+            </div>
+          </div>
+          <br style="clear:both" />
+
+          <div class="outer icons">
+            <div class="payment-details delete-icon"><img [src]="'assets/images/delete.svg'"><span>Delete</span></div>
+            <div class="payment-details edit-icon"><img [src]="'assets/images/edit.svg'"><span>Edit</span></div>            
+          </div>
+        </div>
+        <br style="clear:both" />
+      </div>
+      <div class="bottom-line" *ngIf="!(i==(payments.length-1))"></div>
+    </div>
+    <!-- <div class="outer" *ngFor="let payment of payments;let i=index">
       <div style="float:left;">
         <p>{{ mt(payment.time).format('MMM DD')}}</p>
         <p>{{ payment.label}}</p>
@@ -82,7 +120,7 @@
       </div>
       <br style="clear: both" />
       <hr *ngIf="!(i==(payments.length-1))">
-    </div>
+    </div> -->
   </div>
 
 </div>

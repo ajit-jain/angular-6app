@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   mt = moment;
   @ViewChild('calendar', { read: IgxCalendarComponent }) public calendar: IgxCalendarComponent;
   payments: Array<any> = [];
+  isMonthly = false;
   expenses = {
     total_expenses: '00.00',
     creditor: '',
@@ -163,6 +164,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   initializeCalender() {
+    this.isMonthly = true;
     const today = new Date(this.getStartOfDay(new Date()));
     this.selectedDates = [today];
     this.calendar.selectDate(today);
@@ -193,6 +195,7 @@ export class DashboardComponent implements OnInit {
     this.expenses.amountLeft = amountLeft;
   }
   setMonthFilter() {
+    this.isMonthly = false;
     this.initializeThisMonth();
     this.selectedDates = [];
     this.setPayments(this.allPayMents);

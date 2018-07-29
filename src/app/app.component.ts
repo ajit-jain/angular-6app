@@ -3,6 +3,7 @@ import { UserService } from './shared/services/user.service';
 import { CookieService } from './shared/services/cookie.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   token = '';
   constructor(private _cookieService: CookieService,
-    private _userService: UserService, private router: Router) {
+    private _userService: UserService, private router: Router, private sanitizer: DomSanitizer) {
 
   }
   ngOnInit() {
@@ -36,5 +37,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
+  transform(html){
+    return this.sanitizer.bypassSecurityTrustUrl(html);
+  }
 }
