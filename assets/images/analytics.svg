@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(0,0,0,0.6);
+      }
+    </style>
+  </defs>
+  <path id="iconmonstr-chart-1" class="cls-1" d="M7,19H1V8H7ZM15,1H9V19h6Zm8,11H17v7h6Zm1,9H0v2H24Z" transform="translate(0 -1)"/>
+</svg>

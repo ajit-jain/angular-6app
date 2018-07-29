@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffbd37;
+      }
+    </style>
+  </defs>
+  <path id="iconmonstr-plus-5" class="cls-1" d="M37.5,0A37.5,37.5,0,1,0,75,37.5,37.5,37.5,0,0,0,37.5,0ZM56.25,40.625H40.625V56.25h-6.25V40.625H18.75v-6.25H34.375V18.75h6.25V34.375H56.25Z"/>
+</svg>
