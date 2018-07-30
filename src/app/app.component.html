@@ -10,13 +10,23 @@
     </div>
   </main>
   <footer>
-    <div *ngIf="isUserLoggedIn() && !isHideBar" class="row fixed-footer">
+    <div *ngIf="_authService.isUserEmailLoggedIn && !isHideBar" class="row fixed-footer">
       <div class="col-md-2"></div>
       <div class="col-12 col-md-8" id="footerDiv">
-        <div style="float:left;">
+        <div class="analytics">
           <span>
-            <a [routerLink]="['/site/dashboard']">
-              <i class="fas fa-chart-bar"></i>
+            <a [routerLink]="['/site/dashboard']" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 22">
+                <defs>
+                  <style>
+                    .cls-1 {
+                      fill: rgba(0,0,0,0.6);
+                    }
+                  </style>
+                </defs>
+                <path id="iconmonstr-chart-1" [ngStyle]="{'fill':activeTab==='dashboard'?'rgba(0,0,0,0.6)':'rgba(0,0,0,0.2)' }" d="M7,19H1V8H7ZM15,1H9V19h6Zm8,11H17v7h6Zm1,9H0v2H24Z" transform="translate(0 -1)"/>
+              </svg>
+              <!-- <img [ngClass]="{'active':activeTab==='dashboard'}" [src]="'assets/images/analytics.svg'"> -->
             </a>
           </span>
         </div>
@@ -25,16 +35,30 @@
             <!-- <a data-toggle="modal" style="cursor:pointer;" data-target="#splitiiModal">
               <i class="fas fa-plus-circle"></i>
             </a> -->
-            <a data-toggle="modal" style="cursor:pointer;" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
+            <!-- <a data-toggle="modal" style="cursor:pointer;" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
               <i class="fas fa-plus-circle"></i>
+            </a> -->
+            <a data-toggle="modal" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
+              <img [src]="'assets/images/plus.svg'">
             </a>
           </span>
-          <p style="font-size:12px;">Add Expense</p>
+          <p class="label">Add Expense</p>
         </div>
-        <div style="float:right;">
+        <div class="settings">
           <span>
             <a [routerLink]="['/site/settings']">
-              <i class="fas fa-cog"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <defs>
+                  <style>
+                    .cls-1 {
+                      fill: rgba(0,0,0,0.2);
+                    }
+                  </style>
+                </defs>
+                <path id="iconmonstr-gear-1" [ngStyle]="{'fill':activeTab==='settings'?'rgba(0,0,0,0.6)':'rgba(0,0,0,0.2)' }" d="M24,13.616V10.384c-1.651-.587-2.694-.752-3.219-2.019h0c-.527-1.271.1-2.134.847-3.707L19.343,2.372c-1.561.742-2.433,1.375-3.707.847h0C14.366,2.693,14.2,1.643,13.616,0H10.384C9.8,1.635,9.635,2.692,8.365,3.219h0c-1.271.528-2.132-.1-3.707-.847L2.372,4.657c.745,1.568,1.375,2.434.847,3.707S1.635,9.8,0,10.384v3.232c1.632.58,2.692.749,3.219,2.019S3.1,17.8,2.372,19.342l2.285,2.286c1.562-.743,2.434-1.375,3.707-.847h0C9.635,21.307,9.8,22.36,10.384,24h3.232c.582-1.636.75-2.69,2.027-3.222h0c1.262-.524,2.12.1,3.7.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706S22.367,14.2,24,13.616ZM12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16Z"/>
+              </svg>
+              
+              <!-- <img [ngClass]="{'active':activeTab==='settings'}" [src]="'assets/images/settings.svg'" > -->
             </a>
           </span>
         </div>

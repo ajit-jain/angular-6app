@@ -16,17 +16,21 @@
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" id="password" class="form-control" [class.errorBorder]="loginForm.get('password').errors && (loginForm.get('password').dirty || loginForm.get('password').touched)"
-    formControlName="password" aria-describedby="passwordHelpBlock">
+      formControlName="password" aria-describedby="passwordHelpBlock">
     <div class="form-control-feedback" *ngIf="loginForm.get('password').errors && (loginForm.get('password').dirty || loginForm.get('password').touched)">
       <p class="error" *ngIf="loginForm.get('password').errors.required">Please enter password</p>
       <p class="error" *ngIf="loginForm.get('password').errors.minlength">Password must be at least 6 characters long.</p>
-      
+
     </div>
   </div>
-<div class="btnClass">
-    <button type="submit" class="btn1 text-center" #btnRef  [disabled]="!loginForm.valid">Log In</button>
-    
-</div>
+  <div class="resetPassword">
+    <a href="javascript::void(0);" >Reset Password</a>
+  </div>
+  <div class="btnClass">
+    <button type="submit" class="btn1 text-center" [class.active]="loginForm.valid" #btnRef [disabled]="!loginForm.valid">Log In</button>
+
+  </div>
+
   <div class="formFooter">
     <span>Don't have an account? </span>
     <a href="javascript::void(0)" (click)="changeAuthType('signup')">Create Account</a>

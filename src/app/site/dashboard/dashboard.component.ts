@@ -54,9 +54,7 @@ export class DashboardComponent implements OnInit {
 
     this._userService.userData.subscribe((data) => {
       if (data) {
-        setTimeout(() => {
           this.getPayMents();
-        }, 100);
       }
     });
   }

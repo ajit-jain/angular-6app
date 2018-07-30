@@ -16,15 +16,22 @@ import { ModuleWithProviders } from '@angular/core';
 import { AuthComponent } from 'src/app/shared/auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
+import { NotConnectedComponent } from 'src/app/shared/components/not-connected/not-connected.component';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 const routing: Routes = [
   {
     path: '',
     component: AuthComponent,
-    canActivate: [LoginGuard]
+    canActivate: [LoginGuard],
   },
   {
     path: 'site',
     loadChildren: './site/site.module#SiteModule'
+  },
+  {
+    path: 'not-connected',
+    component: NotConnectedComponent,
+    canActivate: [AuthGuard]
   }
 ];
 const routes: ModuleWithProviders = RouterModule.forRoot(routing);

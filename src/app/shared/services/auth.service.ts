@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { CookieService } from 'src/app/shared/services/cookie.service';
+import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  authState: any = null;
+  authState: firebase.User = null;
   $authSubscriber;
   constructor(private afAuth: AngularFireAuth,
     private router: Router, private _cookieService: CookieService) {
 
-    this.$authSubscriber = this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth;
+    this.afAuth.authState.subscribe(user => {
+      this.authState = user;
+      console.log(this.authState);
     });
-  }
-  get isUserAnonymousLoggedIn(): boolean {
-    return (this.authState !== null) ? this.authState.isAnonymous : false;
   }
 
   get currentUserId(): string {
@@ -31,7 +30,9 @@ export class AuthService {
   get currentUser(): any {
     return (this.authState !== null) ? this.authState : null;
   }
-
+  get isUserAnonymousLoggedIn(): boolean {
+    return (this.authState !== null) ? this.authState.isAnonymous : false;
+  }
   get isUserEmailLoggedIn(): boolean {
     if ((this.authState !== null) && (!this.isUserAnonymousLoggedIn)) {
       return true;
@@ -41,37 +42,18 @@ export class AuthService {
   }
 
   signUpWithEmail(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user;
-        this._cookieService.createCookie('token', btoa(JSON.stringify(this.authState)), 3);
-      })
-      .catch(error => {
-        console.log(error);
-        throw error;
-      });
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   loginWithEmail(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user;
-        this._cookieService.createCookie('token', btoa(JSON.stringify(this.authState)), 3);
-      })
-      .catch(error => {
-        console.log(error);
-        throw error;
-      });
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  signOut(): void {
-    this.$authSubscriber.unsubscribe();
-    this.afAuth.auth.signOut().then(() => {
-      this._cookieService.eraseCookie('token');
-      this.router.navigate(['/']);
-
-    }).catch(e => {
-      console.log(e);
-    });
+  signOut() {
+    // this.$authSubscriber.unsubscribe();
+    return this.afAuth.auth.signOut();
+  }
+  currentUserObservable() {
+    return this.afAuth.authState;
   }
 }

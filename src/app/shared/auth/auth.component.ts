@@ -22,8 +22,8 @@ export class AuthComponent implements OnInit {
     this.authType = type;
   }
   redirectToSite(details) {
-    this._cookieService.createCookie('token', btoa(`${details['email']}:${details['id']}`), 3);
+    // this._cookieService.createCookie('token', btoa(`${details['email']}:${details['id']}`), 3);
+    setTimeout(() => { this._userService.userData.next(this._userService.user); }, 100);
     this._router.navigate(['/site']);
-    this._userService.userData.next(this._userService.user);
   }
 }

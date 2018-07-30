@@ -33,8 +33,9 @@
 }
 
 #login .formFooter {
-  padding: 15px;
+  padding: 15px 10px;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 #login .formFooter span {
@@ -56,4 +57,17 @@
 
 #login .form-group .errorBorder {
   border:1px solid #FF7043;
+}
+#login .btnClass .btn1.active {
+  background: #4878EF;
+}
+.resetPassword{
+  text-align: right;
+  margin-top:-17px;
+  margin-bottom: 10px;
+}
+.resetPassword a{
+  text-decoration: none;
+  color:#4878EF;
+  font-size: 0.77rem;
 }

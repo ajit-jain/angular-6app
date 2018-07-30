@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="btnClass">
-    <button type="submit" #btnRef class="btn1 text-center" [disabled]="!signupForm.valid">Create Account</button>
+    <button type="submit" #btnRef class="btn1 text-center" [class.active]="signupForm.valid" [disabled]="!signupForm.valid">Create Account</button>
 
   </div>
   <div class="formFooter">

@@ -33,8 +33,9 @@
 }
 
 #signup .formFooter {
-    padding: 15px;
+    padding: 15px 10px;
     text-align: center;
+    font-size: 0.9rem;
 }
 #signup .formFooter span {
     color:#000000;
@@ -53,4 +54,7 @@
 
 #signup .form-group .errorBorder {
   border:1px solid #FF7043;
+}
+#signup .btnClass .btn1.active {
+  background: #4878EF;
 }

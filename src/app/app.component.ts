@@ -1,3 +1,4 @@
+import { AuthService } from './shared/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { CookieService } from './shared/services/cookie.service';
@@ -13,38 +14,43 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   token = '';
+  activeTab = 'dashboard';
   isHideBar = false;
   constructor(private _cookieService: CookieService, private activeRoute: ActivatedRoute,
-    private _userService: UserService, private router: Router, private sanitizer: DomSanitizer) {
+    private _userService: UserService, private router: Router, private sanitizer: DomSanitizer,
+    public _authService: AuthService) {
 
   }
   ngOnInit() {
     this.token = this._cookieService.readCookie('token');
-    if (this.token && !this._userService.user['email']) {
-      this.setUser();
-    }
-    // if (token) {
-    //   window.location.href = `${environment.APP_PROTOCOL}${environment.APP_EXTENSION}/dashboard`; 
-    // }
     this.router.events.subscribe((event) => {
-      if (location.pathname.includes('/site/addSplitii')) {
+      if (location.pathname.includes('/site/addSplitii') || location.pathname.includes('/not-connected')) {
         this.isHideBar = true;
       } else {
-        this.isHideBar = false;
+        setTimeout(() => this.isHideBar = false, 100);
+      }
+      this.checkForActiveTab(location.pathname);
+    });
+    this._userService.userData.subscribe((data) => {
+      if (data) {
+        this._userService.getUser(data['partner_email']).then(d => {
+          // if (!d) {
+          //   this.isHideBar = true;
+          //   this.router.navigate(['/not-connected']);
+          // }
+        });
       }
     });
-
+  }
+  checkForActiveTab(path) {
+    if (path.includes('/site/dashboard')) {
+      this.activeTab = 'dashboard';
+    } else if (path.includes('/site/settings')) {
+      this.activeTab = 'settings';
+    }
   }
   isUserLoggedIn() {
     return this._cookieService.readCookie('token');
-  }
-  async setUser() {
-    try {
-      await this._userService.setUserbyToken(this.token);
-    } catch (e) {
-      this._cookieService.eraseCookie('token');
-      this.router.navigate(['/']);
-    }
   }
   transform(html) {
     return this.sanitizer.bypassSecurityTrustUrl(html);

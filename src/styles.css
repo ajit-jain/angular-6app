@@ -33,20 +33,22 @@ body {
 
 .fixed-footer #footerDiv {
   border-top: 1px solid #EFEFEF;
-  padding: 18px 15px;
+  padding: 18px 40px;
   background: white;
 }
 
 .fixed-footer #footerDiv #addButton {
   position: absolute;
-  top: -44%;
-  left: 42%;
+  top: -36px;
+  left: 40%;
   text-align: center;
+  background: white;
 }
 
 .fixed-footer #footerDiv a i {
   color: black;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .fixed-footer #footerDiv #addButton a i {
@@ -54,6 +56,11 @@ body {
   color: #FCCB20;
   background: white;
   border-radius: 50%;
+}
+.fixed-footer #footerDiv p.label{
+  font-size: 12px;
+  font-family: Open Sans, Bold;
+  margin: -10px 0 0 0;
 }
 
 
@@ -124,3 +131,25 @@ body {
 }
 
 input:checked + label{background-color: #f00;}
+
+#footerDiv .analytics {
+  float: left;
+  position: relative;
+}
+#footerDiv .settings {
+  float: right;
+  position: relative;
+}
+
+#footerDiv .analytics img path{
+  fill:rgba(0, 0, 0, 0.2);
+}
+#footerDiv .analytics img.active path{
+  fill:rgba(0, 0, 0, 0.6);
+}
+#footerDiv .settings img path{
+  fill:rgba(0, 0, 0, 0.2);
+}
+#footerDiv .settings img.active path{
+  fill:rgba(0, 0, 0, 0.6);
+}

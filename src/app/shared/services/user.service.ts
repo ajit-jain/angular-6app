@@ -56,11 +56,12 @@ export class UserService {
   }
   async setUserbyToken(token) {
     try {
-      const email = atob(token).split(':')[0];
+      const email = token;//atob(token).split(':')[0];
       if (email) {
         const user = (await this.getUser(email)).data();
-        this.userData.next(user);
         user && (this.user = user);
+        this.userData.next(user);
+        
       }
     } catch (e) {
       throw e;

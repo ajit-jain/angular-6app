@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('btnRef') btnRef: ElementRef;
 
   loginForm: FormGroup;
-  constructor(private _fb: FormBuilder, private _userService: UserService) { }
+  constructor(private _fb: FormBuilder, private _userService: UserService, private _auth: AuthService) { }
   error = '';
   ngOnInit() {
     this.loginForm = this._fb.group({
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     this.btnRef.nativeElement.textContent = 'Please Wait...';
     this.btnRef.nativeElement.disabled = true;
     try {
+      await this._auth.loginWithEmail(formDetails['email'], formDetails['password']);
       const userData = await this._userService.getUser(formDetails['email']);
       if (userData) {
         this._userService.user = userData.data();
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
       }
     } catch (e) {
       console.log(e);
+      this.error = e['message'];
     } finally {
       this.btnRef.nativeElement.textContent = 'Log In';
       this.btnRef.nativeElement.disabled = false;

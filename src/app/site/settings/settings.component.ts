@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from './../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
   constructor(private _cookieService: CookieService, private router: Router,
-    private _fb: FormBuilder, public _userService: UserService) { }
+    private _fb: FormBuilder, public _userService: UserService, private _authService: AuthService) { }
 
   ngOnInit() {
     this._userService.userData.subscribe((data) => {
@@ -26,8 +27,9 @@ export class SettingsComponent implements OnInit {
     });
 
   }
-  logout() {
-    this._cookieService.eraseCookie('token');
+  async logout() {
+    // this._cookieService.eraseCookie('token');
+    await this._authService.signOut();
     this.router.navigate(['/']);
   }
 
