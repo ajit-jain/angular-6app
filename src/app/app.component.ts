@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
       if (location.pathname.includes('/site/addSplitii') || location.pathname.includes('/not-connected')) {
         this.isHideBar = true;
       } else {
-        setTimeout(() => this.isHideBar = false, 100);
+        this.isHideBar = false;
       }
       this.checkForActiveTab(location.pathname);
     });

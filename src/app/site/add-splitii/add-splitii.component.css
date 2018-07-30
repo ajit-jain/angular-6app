@@ -62,6 +62,8 @@
   color: #000000;
   opacity: 0.5;
   margin: 0;
+  line-height: 0;
+  text-align: center;
 }
 
 #splitiiModal .splitiiForm .step2 {
@@ -124,7 +126,9 @@
   margin: 0 auto;
   padding: 40px 10px;
 }
-
+#splitiiModal .splitiiForm .step3 .label{
+  margin: 0;
+}
 #splitiiModal .splitiiForm .step3 .breakDowns p {
   font-family: Open Sans, Semibold;
   color: #000000;
