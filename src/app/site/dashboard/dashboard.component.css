@@ -150,8 +150,8 @@ h1 {
 
 #payments .payment-details .payment-icon {
   position: absolute;
-  right: 0;
-  top: 3px;
+  right: 4px;
+  top: 4px;
 }
 
 #payments .payment-splits {

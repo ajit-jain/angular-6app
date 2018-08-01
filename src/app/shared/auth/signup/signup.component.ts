@@ -31,21 +31,32 @@ export class SignupComponent implements OnInit {
     this.error = '';
     this.btnRef.nativeElement.textContent = 'Please Wait...';
     this.btnRef.nativeElement.disabled = true;
-
+    formDetails['email'] = formDetails['email'].trim().toLowerCase();
+    formDetails['partner_email'] = formDetails['partner_email'].trim().toLowerCase();
     try {
       if (formDetails['email'].trim() === formDetails['partner_email'].trim()) {
         this.error = 'Partner Email should be distinct from email';
       } else {
-        await this._authService.signUpWithEmail(formDetails['email'], formDetails['password']);
         // const userData = await this._userService.getUser(formDetails['email']);
         // if (userData) {
         //   this.error = 'Email already registered';
         // } else {
-        const userRef = await this._userService.createUser(formDetails);
-        this._userService.user = (await userRef.get()).data();
-        console.log(this._userService.user);
-        this.userCreated.emit(Object.assign(formDetails, { id: userRef.id }));
-        // }
+        const partnerRef = await this._userService.getUser(formDetails['partner_email']);
+        if (partnerRef) {
+          const data = partnerRef.data();
+          if (data['partner_email'] === formDetails['email']) {
+            this._userService.user = await this.syncUserWithFireBase(formDetails);
+            this._userService.user['partner_name'] = data['name'];
+            this.redirectUser(this._userService.user);
+          } else {
+            const err = new Error();
+            err.message = 'please change partner email as entered email is already registered with some other user';
+            throw err;
+          }
+        } else {
+          this._userService.user = await this.syncUserWithFireBase(formDetails);
+          this.redirectUser(this._userService.user);
+        }
       }
     } catch (e) {
       this.error = e['message'];
@@ -55,4 +66,15 @@ export class SignupComponent implements OnInit {
       this.btnRef.nativeElement.disabled = false;
     }
   }
+  async syncUserWithFireBase(formDetails) {
+    await this._authService.signUpWithEmail(formDetails['email'], formDetails['password']);
+    const userRef = await this._userService.createUser(formDetails);
+    return (await userRef.get()).data();
+  }
+  redirectUser(formDetails) {
+    console.log(this._userService.user);
+    this.userCreated.emit(formDetails);
+  }
+
+
 }

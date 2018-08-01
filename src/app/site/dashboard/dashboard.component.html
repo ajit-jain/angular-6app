@@ -19,7 +19,7 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header outer">
-              <button type="button" class="close closeButton"  data-dismiss="modal">&times;</button>
+              <button type="button" class="close closeButton" data-dismiss="modal">&times;</button>
               <div class="clearDiv">
                 <a href="javascript::void(0)" (click)="initializeCalender()">Clear</a>
               </div>
@@ -32,7 +32,7 @@
               <igx-calendar #calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
             </div>
             <div class="modal-footer footerDiv">
-              <button type="button" class="btn btn-default"  data-dismiss="modal" (click)="getDates(selectedDates)">Done</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="getDates(selectedDates)">Done</button>
             </div>
           </div>
 
@@ -47,7 +47,7 @@
       <p class="head"> Total expenses</p>
       <h1>${{expenses?.total_expenses}}</h1>
 
-      <p class="owes" [hidden]="!expenses['debitor']"> {{ expenses.creditor }} ownes {{ expenses.debitor }}
+      <p class="owes" [hidden]="!expenses['debitor']"> {{ getName(expenses.creditor) }} ownes {{ getName(expenses.debitor) }}
         <span>${{expenses.amountLeft}}</span>
       </p>
       <p class="owes" [hidden]="expenses['debitor']"> Nothing to settle down </p>
@@ -62,18 +62,26 @@
         <div class="outer">
           <div class="payment-details">
             <p class="label zeroMargin">{{ payment.label}}</p>
-            <p class="paidBy zeroMargin">Paid by {{ payment.paidBy}}</p>
+            <p class="paidBy zeroMargin">Paid by {{ getName(payment.paidBy)}}</p>
           </div>
           <div class="payment-details amount-right-pad">
             <h6 class="amount">${{payment.totalAmount}}</h6>
             <a class="payment-icon" data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" (click)="toggleIcon($event,'icon_'+payment.id)"
               role="button" aria-expanded="false">
-              <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i>
+              <!-- <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i> -->
+              <img width="10px" [src]="'assets/images/dropdown.svg'">
             </a>
-            <div class="collapse payment-splits" [id]="'collapse_'+payment.id">
-              <p>{{payment.split[0].email}}:${{payment.split[0].amount}}</p>
-              <p>{{payment.split[1].email}}:${{payment.split[1].amount}}</p>
+            <div *ngIf="payment.split[0].email===_userService.user['email'];else other" class="collapse payment-splits" [id]="'collapse_'+payment.id">
+              <p>{{_userService.user['name']}}:${{payment.split[0].amount}}</p>
+              <p>{{_userService.user['partner_name']}}:${{payment.split[1].amount}}</p>
             </div>
+            <ng-template #other>
+              <div class="collapse payment-splits" [id]="'collapse_'+payment.id">
+                <p>{{_userService.user['name']}}:${{payment.split[1].amount}}</p>
+                <p>{{_userService.user['partner_name']}}:${{payment.split[0].amount}}</p>
+              </div>
+            </ng-template>
+
           </div>
           <br style="clear:both" />
 

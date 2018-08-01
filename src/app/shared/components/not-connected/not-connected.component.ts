@@ -1,4 +1,6 @@
+import { UserService } from 'src/app/shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-connected',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotConnectedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService:UserService) { }
 
   ngOnInit() {
   }

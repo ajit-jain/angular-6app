@@ -31,16 +31,33 @@ export class AppComponent implements OnInit {
       }
       this.checkForActiveTab(location.pathname);
     });
-    this._userService.userData.subscribe((data) => {
+    if (location.pathname.includes('/not-connected') && !this._userService.user['email']) {
+      this.setUser();
+    }
+    this._userService.userData.subscribe(async (data) => {
       if (data) {
-        this._userService.getUser(data['partner_email']).then(d => {
-          // if (!d) {
-          //   this.isHideBar = true;
-          //   this.router.navigate(['/not-connected']);
-          // }
-        });
+        const partnerRef = await this._userService.getUser(data['partner_email']);
+        if (!partnerRef) {
+          this.isHideBar = true;
+          this.router.navigate(['/not-connected']);
+        } else {
+          const d = partnerRef.data();
+          if (d['email'] === data['partner_email']) {
+            this.isHideBar = false;
+            this._userService.user['partner_name'] = d['name'];
+            this.router.navigate(['/site/dashboard']);
+          }
+        }
       }
     });
+  }
+  async setUser() {
+    try {
+      await this._userService.setUserbyToken(this._authService.currentUserName);
+    } catch (e) {
+      // this._cookieService.eraseCookie('token');
+      this.router.navigate(['/']);
+    }
   }
   checkForActiveTab(path) {
     if (path.includes('/site/dashboard')) {

@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
     this._userService.userData.subscribe((data) => {
       if (data) {
-          this.getPayMents();
+        this.getPayMents();
       }
     });
   }
@@ -206,12 +206,15 @@ export class DashboardComponent implements OnInit {
     this.selectedPayment = payment;
     jQuery('#delete-modal').modal('show');
   }
-  async deletePayment(payment){
-    try{
+  async deletePayment(payment) {
+    try {
       await this._userService.deletePayment(payment.id);
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
 
+  }
+  getName(email) {
+    return ((email === this._userService.user['email']) ? this._userService.user['name'] : this._userService.user['partner_name']);
   }
 }

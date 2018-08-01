@@ -1,0 +1,46 @@
+.outer{
+    float: left;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.outer.parent{
+   padding:  50px 0 0 0;
+}
+.outer #not-connect{
+    width:60px;
+}
+.outer h1{
+    font-family: Open Sans, Bold;
+    font-weight: 700;
+    color: #000000;
+    opacity: 0.7;
+    font-size: 2rem;
+    margin: 0;
+}
+.outer h3{
+    font-family: Open Sans, Regular;
+    font-weight: normal;
+    color: #000000;
+    opacity: 0.6;
+    font-size: 1rem;
+    margin-top: 0;
+}
+.refresh{
+    margin-top: 40px;
+}
+.refresh .btn-refresh{
+    width: 156px;
+    /* height: 35px; */
+    border: 0;
+    border-radius: 16px;
+    background-color: #4877EF;
+    color: white;
+    font-family: Open Sans, Bold;
+    padding: 10px;
+    font-size: 1rem;
+}
+.refresh .btn-refresh svg{
+    position: relative;
+    top: -2px;
+}

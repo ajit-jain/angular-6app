@@ -35,7 +35,7 @@ export class AddSplitiiComponent implements OnInit {
       paidBy: [data['name'], Validators.required],
       label: ['', Validators.required],
       name: [data['name']],
-      partner_name: [data['partner_email']],
+      partner_name: [data['partner_name']],
       isHalf: [true],
       share: [0.00]
     };
@@ -91,5 +91,8 @@ export class AddSplitiiComponent implements OnInit {
       event.target.value = this.addSplitiiForm.get('totalAmount').value;
       this.addSplitiiForm.get('share').setValue(this.addSplitiiForm.get('totalAmount').value);
     }
+  }
+  getName(email) {
+    return ((email === this._userService.user['email']) ? this._userService.user['name'] : this._userService.user['partner_name']);
   }
 }
