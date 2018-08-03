@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent implements OnInit {
   token = '';
   activeTab = 'dashboard';
-  isHideBar = false;
+  isHideBar = true;
   constructor(private _cookieService: CookieService, private activeRoute: ActivatedRoute,
     private _userService: UserService, private router: Router, private sanitizer: DomSanitizer,
     public _authService: AuthService) {
@@ -24,18 +25,23 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.token = this._cookieService.readCookie('token');
     this.router.events.subscribe((event) => {
-      if (location.pathname.includes('/site/addSplitii') || location.pathname.includes('/not-connected')) {
-        this.isHideBar = true;
-      } else {
-        this.isHideBar = false;
+      if (event instanceof NavigationEnd) {
+        console.log('NavigationEnd:', event);
+        if (location.pathname.includes('/site/addSplitii') || location.pathname.includes('/not-connected') || event.url === '/') {
+          this.isHideBar = true;
+        } else {
+          this.isHideBar = false;
+        }
+        this.checkForActiveTab(location.pathname);
       }
-      this.checkForActiveTab(location.pathname);
+
     });
     if (location.pathname.includes('/not-connected') && !this._userService.user['email']) {
       this.setUser();
     }
     this._userService.userData.subscribe(async (data) => {
       if (data) {
+        console.log("world")
         const partnerRef = await this._userService.getUser(data['partner_email']);
         if (!partnerRef) {
           this.isHideBar = true;
@@ -66,10 +72,11 @@ export class AppComponent implements OnInit {
       this.activeTab = 'settings';
     }
   }
-  isUserLoggedIn() {
-    return this._cookieService.readCookie('token');
-  }
   transform(html) {
     return this.sanitizer.bypassSecurityTrustUrl(html);
+  }
+  get isUserLoggedIn(): boolean {
+    console.log(this._authService.isUserEmailLoggedIn, this.isHideBar);
+    return this._authService.isUserEmailLoggedIn && !this.isHideBar;
   }
 }

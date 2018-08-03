@@ -1,9 +1,10 @@
+<div *ngIf="error" class="fireBase-error">
+  <p class="" style="margin:0">
+    {{error}} Please change partner email as entered email is already registered with some other user
+  </p>
+</div>
 <form id="signup" [formGroup]="signupForm" (ngSubmit)="createAccount(signupForm.value)">
-  <div *ngIf="error">
-    <small class="form-text text-muted">
-      {{error}}
-    </small>
-  </div>
+  
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" id="name" [class.errorBorder]="signupForm.get('name').errors && (signupForm.get('name').dirty || signupForm.get('name').touched)"

@@ -21,19 +21,30 @@ export class AddSplitiiComponent implements OnInit {
   stepsCompleted = [];
   activeStep = 0;
   ngOnInit() {
+    console.log(this._userService.selectedPayment);
     this.setInitialSteps();
     this._userService.userData.subscribe((data) => {
       if (data) {
         this.addSplitiiForm = this._fb.group(this.getSplitiiFormData(data));
       }
     });
+    if (this._userService.selectedPayment.id) {
+      const payment = this._userService.selectedPayment;
+      this.addSplitiiForm = this._fb.group(this.getSplitiiFormData({
+        totalAmount: payment['totalAmount'],
+        name: this._userService.user['name'],
+        label: payment['label'],
+        partner_name: this._userService.user['partner_name'],
+        paidBy: this._userService.user['name']
+      }))
+    }
 
   }
   getSplitiiFormData(data) {
     return {
-      totalAmount: ['', Validators.required],
+      totalAmount: [data['totalAmount'] || '', Validators.required],
       paidBy: [data['name'], Validators.required],
-      label: ['', Validators.required],
+      label: [data['label'] || '', Validators.required],
       name: [data['name']],
       partner_name: [data['partner_name']],
       isHalf: [true],
@@ -67,7 +78,11 @@ export class AddSplitiiComponent implements OnInit {
 
         this.nextBtn.nativeElement.textContent = 'Please Wait...';
         this.nextBtn.nativeElement.disabled = true;
-        await this.addSplitii(this.addSplitiiForm.value);
+        if (!this._userService.selectedPayment.id) {
+          await this.addSplitii(this.addSplitiiForm.value);
+        } else {
+          await this.editSplitii(this.addSplitiiForm.value, this._userService.selectedPayment.id);
+        }
         this.setInitialSteps();
         this.addSplitiiForm = this._fb.group(this.getSplitiiFormData(this._userService.user));
         this._router.navigate(['site/dashboard']);
@@ -83,7 +98,7 @@ export class AddSplitiiComponent implements OnInit {
     }
   }
   async addSplitii(formData) {
-    await this._userService.addSplitii(formData);
+    return await this._userService.splitii(formData);
   }
   verifyAmount(event, totalAmount) {
     const enteredAmount = parseFloat(event.target.value) || '';
@@ -94,5 +109,8 @@ export class AddSplitiiComponent implements OnInit {
   }
   getName(email) {
     return ((email === this._userService.user['email']) ? this._userService.user['name'] : this._userService.user['partner_name']);
+  }
+  async editSplitii(formData, paymentId) {
+    return (await this._userService.splitii(formData, paymentId));
   }
 }

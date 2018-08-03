@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     this.authType = type;
   }
   redirectToSite(details) {
+    // this._router.navigate(['/site']);
     this._userService.userData.next(this._userService.user);
-    this._router.navigate(['/site']);
   }
 }

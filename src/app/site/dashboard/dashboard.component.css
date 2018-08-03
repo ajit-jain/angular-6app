@@ -155,7 +155,7 @@ h1 {
 }
 
 #payments .payment-splits {
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 #payments .payment-splits p {
@@ -174,11 +174,12 @@ h1 {
   color: #000000;
   opacity: 0.5;
   cursor: pointer;
+  text-align: left;
 }
 
 #payments .icons .edit-icon {
   color: #4877EF;
-  padding-right: 25px;
+  /* padding-right: 25px; */
   text-align: right;
   cursor: pointer;
 }

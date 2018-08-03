@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
             this.redirectUser(this._userService.user);
           } else {
             const err = new Error();
-            err.message = 'please change partner email as entered email is already registered with some other user';
+            err.message = 'Please enter another email for partner. This email has been connected already.';
             throw err;
           }
         } else {

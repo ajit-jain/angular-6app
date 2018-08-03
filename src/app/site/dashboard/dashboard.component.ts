@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from './../../shared/services/user.service';
@@ -20,12 +21,13 @@ export class DashboardComponent implements OnInit {
   selectedPayment: any = {};
   constructor(public _userService: UserService,
     private db: AngularFirestore,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private _router: Router) {
 
   }
   mt = moment;
   @ViewChild('calendar', { read: IgxCalendarComponent }) public calendar: IgxCalendarComponent;
-  payments: Array<any> = [];
+  payments;
   isMonthly = false;
   expenses = {
     total_expenses: '00.00',
@@ -38,6 +40,7 @@ export class DashboardComponent implements OnInit {
     firstDay: new Date(),
     lastDay: new Date()
   };
+  loader = false;
   public intlDateTimeFormat = new Intl.DateTimeFormat() as any;
   public formatParts: boolean = this.intlDateTimeFormat.formatToParts;
   public getDatePart(val: any, component: any, datePart: string) {
@@ -65,6 +68,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.dateFilter);
   }
   getPayMents() {
+    jQuery('#overlay').show();
     combineLatest(
       this.db.collection('expenses', ref => {
         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
@@ -78,10 +82,16 @@ export class DashboardComponent implements OnInit {
       }).snapshotChanges()
     ).subscribe((data: any) => {
       console.log(data);
-      let user1 = this.filterData(data[0]);
-      let user2 = this.filterData(data[1]);
+      const user1 = this.filterData(data[0]);
+      const user2 = this.filterData(data[1]);
       this.allPayMents = ([...user1, ...user2]);
       this.setPayments(this.allPayMents);
+      jQuery('#overlay').hide();
+      this.loader = false;
+    }, error => {
+      jQuery('#overlay').hide();
+
+      this.loader = false;
     });
   }
 
@@ -109,15 +119,20 @@ export class DashboardComponent implements OnInit {
     console.log(dates);
     this.selectedDates = dates;
   }
-  toggleIcon($event, id) {
-    const icon = document.getElementById(id);
-    if (icon && icon.classList.contains('fa-caret-down')) {
-      icon.classList.remove('fa-caret-down');
-      icon.classList.add('fa-caret-up');
+  toggleIcon(img) {
+    if (img['src'].indexOf('assets/images/dropdown.svg') !== -1) {
+      img['src'] = 'assets/images/arrow-up.svg';
     } else {
-      icon.classList.add('fa-caret-down');
-      icon.classList.remove('fa-caret-up');
+      img['src'] = 'assets/images/dropdown.svg';
     }
+    // const icon = document.getElementById(id);
+    // if (icon && icon.classList.contains('fa-caret-down')) {
+    //   icon.classList.remove('fa-caret-down');
+    //   icon.classList.add('fa-caret-up');
+    // } else {
+    //   icon.classList.add('fa-caret-down');
+    //   icon.classList.remove('fa-caret-up');
+    // }
   }
   getTotalExpenses(data) {
     return data.reduce((acc, d) => (acc + d.totalAmount), 0);
@@ -216,5 +231,9 @@ export class DashboardComponent implements OnInit {
   }
   getName(email) {
     return ((email === this._userService.user['email']) ? this._userService.user['name'] : this._userService.user['partner_name']);
+  }
+  editSplitii(payment) {
+    this._userService.selectedPayment = payment;
+    this._router.navigate(['/site/addSplitii']);
   }
 }

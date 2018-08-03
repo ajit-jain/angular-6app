@@ -65,27 +65,56 @@
             <p class="paidBy zeroMargin">Paid by {{ getName(payment.paidBy)}}</p>
           </div>
           <div class="payment-details amount-right-pad">
-            <h6 class="amount">${{payment.totalAmount}}</h6>
-            <a class="payment-icon" data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" (click)="toggleIcon($event,'icon_'+payment.id)"
-              role="button" aria-expanded="false">
+            <h6 class="amount">${{payment.totalAmount.toFixed(2)}}</h6>
+            <a class="payment-icon" data-toggle="collapse" [id]="'parent_'+payment.id" [href]="'#collapse_'+payment.id" role="button"
+              aria-expanded="false">
               <!-- <i [id]="'icon_'+payment.id" class="fas fa-caret-down" style="font-size:12px"></i> -->
-              <img width="10px" [src]="'assets/images/dropdown.svg'">
+              <img width="10px" (click)="toggleIcon($event.target)" [src]="'assets/images/dropdown.svg'">
+
             </a>
-            <div *ngIf="payment.split[0].email===_userService.user['email'];else other" class="collapse payment-splits" [id]="'collapse_'+payment.id">
-              <p>{{_userService.user['name']}}:${{payment.split[0].amount}}</p>
-              <p>{{_userService.user['partner_name']}}:${{payment.split[1].amount}}</p>
-            </div>
-            <ng-template #other>
-              <div class="collapse payment-splits" [id]="'collapse_'+payment.id">
-                <p>{{_userService.user['name']}}:${{payment.split[1].amount}}</p>
-                <p>{{_userService.user['partner_name']}}:${{payment.split[0].amount}}</p>
-              </div>
-            </ng-template>
+
 
           </div>
           <br style="clear:both" />
 
-          <div class="outer icons">
+          <div class="collapse payment-splits amount-right-pad" [id]="'collapse_'+payment.id">
+            <ng-container *ngIf="payment.split[0].email===_userService.user['email'];else other">
+
+              <p>{{_userService.user['name']}}:${{payment.split[0].amount}}</p>
+              <p>{{_userService.user['partner_name']}}:${{payment.split[1].amount}}</p>
+            </ng-container>
+            <ng-template #other>
+              <p>{{_userService.user['name']}}:${{payment.split[1].amount}}</p>
+              <p>{{_userService.user['partner_name']}}:${{payment.split[0].amount}}</p>
+            </ng-template>
+            <div class="outer icons">
+              <div class="payment-details delete-icon" (click)="openModal(payment)">
+                <img [src]="'assets/images/delete.svg'">
+                <span>Delete</span>
+              </div>
+              <div class="payment-details edit-icon" (click)="editSplitii(payment)">
+                <img [src]="'assets/images/edit.svg'">
+                <span>Edit</span>
+              </div>
+            </div>
+          </div>
+          <!-- <ng-template #other>
+              <div class="collapse payment-splits amount-right-pad" [id]="'collapse_'+payment.id">
+                <p>{{_userService.user['name']}}:${{payment.split[1].amount}}</p>
+                <p>{{_userService.user['partner_name']}}:${{payment.split[0].amount}}</p>
+                <div class="outer icons">
+                    <div class="payment-details delete-icon" (click)="openModal(payment)">
+                      <img [src]="'assets/images/delete.svg'">
+                      <span>Delete</span>
+                    </div>
+                    <div class="payment-details edit-icon">
+                      <img [src]="'assets/images/edit.svg'">
+                      <span>Edit</span>
+                    </div>
+                  </div>
+              </div>
+            </ng-template> -->
+          <!-- <div class="outer icons">
             <div class="payment-details delete-icon" (click)="openModal(payment)">
               <img [src]="'assets/images/delete.svg'">
               <span>Delete</span>
@@ -94,14 +123,13 @@
               <img [src]="'assets/images/edit.svg'">
               <span>Edit</span>
             </div>
-          </div>
+          </div> -->
         </div>
         <br style="clear:both" />
       </div>
       <div class="bottom-line" *ngIf="!(i==(payments.length-1))"></div>
     </div>
   </div>
-
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true" id="delete-modal">

@@ -18,5 +18,16 @@
 </head>
 <body>
   <app-root></app-root>
+  <!-- <div id="overlay"></div> -->
+  <script>
+     $('<div id="overlay"/>').css({
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: $(window).height() + 'px',
+        background: 'white url(assets/images/loader.gif) no-repeat center'
+    }).hide().appendTo('body');
+  </script>
 </body>
 </html>

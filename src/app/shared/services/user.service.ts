@@ -30,7 +30,7 @@ export class UserService {
     };
     return (await this.db.collection('users').add(details));
   }
-  async addSplitii(data) {
+  async splitii(data, paymentId = null) {
     try {
       const splitii = {
         label: data['label'],
@@ -49,7 +49,13 @@ export class UserService {
         }
       ];
       console.log(splitii);
-      return (await this.db.collection('expenses').add(splitii));
+      if (!paymentId) {
+        return (await this.db.collection('expenses').add(splitii));
+
+      }else{
+        return (await this.db.collection('expenses').doc(paymentId).set(splitii));
+        
+      }
     } catch (e) {
       console.log(e);
     }
@@ -61,7 +67,7 @@ export class UserService {
         const user = (await this.getUser(email)).data();
         user && (this.user = user);
         this.userData.next(user);
-        
+
       }
     } catch (e) {
       throw e;

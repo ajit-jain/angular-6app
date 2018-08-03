@@ -48,7 +48,7 @@
         </div>
         <div class="breakDowns">
           <p class="label">The breakdown</p>
-          <p>{{ addSplitiiForm.get('name').value }}: ${{addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
+          <p>{{ addSplitiiForm.get('name').value }}: ${{addSplitiiForm.get('isHalf').value ? (addSplitiiForm.get('totalAmount').value/2)
             : addSplitiiForm.get('share').value }}</p>
           <p>{{ addSplitiiForm.get('partner_name').value }} : ${{addSplitiiForm.get('isHalf').value ? addSplitiiForm.get('totalAmount').value/2
             : (addSplitiiForm.get('totalAmount').value - addSplitiiForm.get('share').value ) }}</p>
