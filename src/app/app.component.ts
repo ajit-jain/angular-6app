@@ -52,7 +52,8 @@ export class AppComponent implements OnInit {
           if (d['email'] === data['partner_email']) {
             this.isHideBar = false;
             this._userService.user['partner_name'] = d['name'];
-            (location.pathname === '/') && this.router.navigate(['/site/dashboard']);
+            const path = location.pathname.split('/');
+            (!path[path.length-1] || path[path.length-1]==='/') && this.router.navigate(['/site/dashboard']);
           }
         }
       }

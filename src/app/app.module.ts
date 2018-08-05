@@ -32,6 +32,10 @@ const routing: Routes = [
     path: 'not-connected',
     component: NotConnectedComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/'
   }
 ];
 const routes: ModuleWithProviders = RouterModule.forRoot(routing);
