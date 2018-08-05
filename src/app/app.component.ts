@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationEnd } from '@angular/router';
-
+declare var jQuery: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
     }
     this._userService.userData.subscribe(async (data) => {
       if (data) {
+        // jQuery('#overlay').hide();
         console.log("world")
         const partnerRef = await this._userService.getUser(data['partner_email']);
         if (!partnerRef) {
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit {
           if (d['email'] === data['partner_email']) {
             this.isHideBar = false;
             this._userService.user['partner_name'] = d['name'];
-            this.router.navigate(['/site/dashboard']);
+            (location.pathname === '/') && this.router.navigate(['/site/dashboard']);
           }
         }
       }

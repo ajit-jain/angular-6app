@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+declare var jQuery: any;
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -16,6 +16,8 @@ export class SettingsComponent implements OnInit {
     private _fb: FormBuilder, public _userService: UserService, private _authService: AuthService) { }
 
   ngOnInit() {
+    jQuery('#overlay').hide();
+
     this._userService.userData.subscribe((data) => {
       if (data) {
         this.settingsForm = this._fb.group({

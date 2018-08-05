@@ -4,6 +4,7 @@ import { CookieService } from 'src/app/shared/services/cookie.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-auth',
@@ -23,6 +24,10 @@ export class AuthComponent implements OnInit {
   }
   redirectToSite(details) {
     // this._router.navigate(['/site']);
-    this._userService.userData.next(this._userService.user);
+    // setTimeout(() => {
+    //   jQuery('#overlay').show();
+
+      this._userService.userData.next(this._userService.user);
+    // }, 100);
   }
 }

@@ -3,7 +3,7 @@ import { UserService } from './../shared/services/user.service';
 import { CookieService } from './../shared/services/cookie.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+declare var jQuery: any;
 @Component({
   selector: 'site',
   templateUrl: './site.component.html',
@@ -15,6 +15,7 @@ export class SiteComponent implements OnInit {
 
   ngOnInit() {
     if (this._authService.isUserEmailLoggedIn && !this._userService.user['email']) {
+      jQuery('#overlay').show();
       this.setUser();
     }
     const address = window.location.href;

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
+declare var jQuery: any;
 @Component({
   selector: 'add-splitii',
   templateUrl: './add-splitii.component.html',
@@ -23,6 +24,7 @@ export class AddSplitiiComponent implements OnInit {
   ngOnInit() {
     console.log(this._userService.selectedPayment);
     this.setInitialSteps();
+    jQuery('#overlay').hide();
     this._userService.userData.subscribe((data) => {
       if (data) {
         this.addSplitiiForm = this._fb.group(this.getSplitiiFormData(data));

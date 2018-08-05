@@ -38,7 +38,7 @@
             <!-- <a data-toggle="modal" style="cursor:pointer;" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
               <i class="fas fa-plus-circle"></i>
             </a> -->
-            <a data-toggle="modal" (click)="isHideBar=true" [routerLink]="['/site/addSplitii']">
+            <a data-toggle="modal" (click)="isHideBar=true;_userService.selectedPayment={}" [routerLink]="['/site/addSplitii']">
               <img [src]="'assets/images/plus.svg'">
             </a>
           </span>
