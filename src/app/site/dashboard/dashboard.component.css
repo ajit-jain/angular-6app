@@ -59,7 +59,7 @@ h1 {
 }
 
 #dashboard .expenses-center h1 {
-  font-family: Montserrat, Regular;
+  font-family: Open Sans, Regular;
   color: #000000;
   opacity: 0.8;
 }
@@ -125,7 +125,8 @@ h1 {
   color: #000000;
   opacity: 0.8;
   font-size: 0.8rem;
-  font-family: Open Sans, Regular;
+  font-family: Open Sans, Bold;
+  font-weight: 600;
 }
 
 #payments .payment-details p.paidBy {
@@ -136,7 +137,7 @@ h1 {
 }
 
 #payments .payment-details .amount {
-  font-family: Montserrat, Regular;
+  font-family: Open Sans, Regular;
   color: #000000;
   opacity: 0.8;
   margin: 0;

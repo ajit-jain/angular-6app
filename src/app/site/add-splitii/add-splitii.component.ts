@@ -50,7 +50,7 @@ export class AddSplitiiComponent implements OnInit {
       name: [data['name']],
       partner_name: [data['partner_name']],
       isHalf: [true],
-      share: [0.00]
+      share: ['']
     };
   }
   setInitialSteps() {
@@ -114,5 +114,8 @@ export class AddSplitiiComponent implements OnInit {
   }
   async editSplitii(formData, paymentId) {
     return (await this._userService.splitii(formData, paymentId));
+  }
+  getAmount(str) {
+    return Number(str);
   }
 }

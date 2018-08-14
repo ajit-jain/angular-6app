@@ -32,6 +32,9 @@ export class UserService {
   }
   async splitii(data, paymentId = null) {
     try {
+      data['totalAmount'] = Number(data['totalAmount']);
+      data['share'] = Number(data['share']);
+      
       const splitii = {
         label: data['label'],
         time: new Date(),
