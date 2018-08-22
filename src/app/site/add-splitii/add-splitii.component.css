@@ -81,11 +81,15 @@
 }
 
 #splitiiModal .splitiiForm .step2 input {
-  border: 0;
-  border-bottom: 1px solid grey;
+  /* border: 0;
+  border-bottom: 1px solid grey; */
   font-size: 1rem;
   width: 100%;
   font-family: Open Sans, Regular;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #9A9A9A;
 }
 
 #splitiModal .splitiiForm .step2 .labelClass {

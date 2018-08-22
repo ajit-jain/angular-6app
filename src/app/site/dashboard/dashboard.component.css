@@ -62,6 +62,12 @@ h1 {
   font-family: Open Sans, Regular;
   color: #000000;
   opacity: 0.8;
+  margin: 10px;
+  font-size: 4.3rem;
+  box-sizing: border-box;
+  line-height: 1;
+  word-wrap: break-word;
+
 }
 
 #dashboard .expenses-center p.head {
@@ -73,11 +79,12 @@ h1 {
   margin-top: 10px;
   font-family: Open Sans, Regular;
   font-size: 1rem;
+  font-weight: normal;
 }
 
 #dashboard .expenses-center p.owes span {
   color: #4877EF;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 /* #dashboard #payments p {
@@ -263,7 +270,17 @@ h1 {
 #delete-modal .btn1.active {
   background: #FF4E37;
 }
-
+.center-dialog {
+  transform: translate(0,50%) !important;
+  width: 80%;
+  margin: auto;
+}
+.calender-dialog{
+  width: 90%;
+  margin: auto;
+  transform: translate(0,6%) !important;
+  /* box-shadow: 0px 1px 2px #000000; */
+}
 @media screen and (max-width: 767px) {
   #dashboard .expenses-center {
     width: 80%;
@@ -309,7 +326,7 @@ h1 {
 }
 #customDate .footerDiv{
   margin:0;padding:0;
-  background: #4878EF;
+  background: #9A9A9A;
 }
 #customDate .footerDiv button{
   position: relative;
@@ -318,4 +335,6 @@ h1 {
   font-family: Open Sans, Semibold;
   color: white;
   font-size: 1rem;
+  padding: 11px;
+  background: transparent;
 }

@@ -13,7 +13,7 @@
 
       <!-- Modal -->
       <div id="customDate" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog calender-dialog">
 
 
           <!-- Modal content-->
@@ -84,8 +84,8 @@
               <p>{{_userService.user['partner_name']}}:${{payment.split[1].amount}}</p>
             </ng-container>
             <ng-template #other>
-              <p>{{_userService.user['name']}}:${{payment.split[1].amount}}</p>
-              <p>{{_userService.user['partner_name']}}:${{payment.split[0].amount}}</p>
+              <p>{{_userService.user['name']}}: ${{payment.split[1].amount}}</p>
+              <p>{{_userService.user['partner_name']}}: ${{payment.split[0].amount}}</p>
             </ng-template>
             <div class="outer icons">
               <div class="payment-details delete-icon" (click)="openModal(payment)">
@@ -133,7 +133,7 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true" id="delete-modal">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-sm center-dialog">
     <div class="modal-content shadow">
       <div class="modal-header">
         <button type="button" class="close restrictPadding" data-dismiss="modal" aria-label="Close">
