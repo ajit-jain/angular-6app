@@ -23,15 +23,15 @@
               <div class="clearDiv">
                 <a href="javascript::void(0)" (click)="initializeCalender()">Clear</a>
               </div>
-              <h4 class="modal-title title">{{mt(selectedDates[0]).format('MMM DD') }} - {{ (selectedDates.length >1)? mt(selectedDates[selectedDates.length-1]).format('MMM
-                DD') : 'End Date'}}</h4>
+              <h4 class="modal-title title">{{(selectedDates.length >0) ? mt(selectedDates[0]).format('MMM DD') : 'Start Date' }} - {{ (selectedDates.length
+                >1)? mt(selectedDates[selectedDates.length-1]).format('MMM DD') : 'End Date'}}</h4>
 
             </div>
             <div class="modal-body">
 
-              <igx-calendar #calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
+              <igx-calendar *ngIf="cal" #calendar selection="range" (onSelection)="verifyRange($event)"></igx-calendar>
             </div>
-            <div class="modal-footer footerDiv">
+            <div class="modal-footer footerDiv" [class.active]="selectedDates.length>1">
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="getDates(selectedDates)">Done</button>
             </div>
           </div>

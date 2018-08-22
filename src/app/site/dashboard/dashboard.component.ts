@@ -19,6 +19,7 @@ declare var jQuery: any;
 export class DashboardComponent implements OnInit {
   selectedDates = [];
   selectedPayment: any = {};
+  cal = false;
   constructor(public _userService: UserService,
     private db: AngularFirestore,
     private cookieService: CookieService,
@@ -181,9 +182,15 @@ export class DashboardComponent implements OnInit {
   }
   initializeCalender() {
     this.isMonthly = true;
-    const today = new Date(this.getStartOfDay(new Date()));
-    this.selectedDates = [today];
-    this.calendar.selectDate(today);
+    this.cal = true;
+    setTimeout(() => {
+      const today = new Date(this.getStartOfDay(new Date()));
+      this.selectedDates = [];
+    }, 100);
+
+
+    //this.calendar.selectDate(today);
+    // this.calendar.selectDate([]);
   }
   getStartOfDay(day) {
     return new Date(day).setHours(0, 0, 0, 0);
@@ -192,11 +199,14 @@ export class DashboardComponent implements OnInit {
     return new Date(day).setHours(23, 59, 59, 999);
   }
   getDates(selectedDates) {
+    if (!selectedDates.length)
+      return;
     let firstDay = new Date(this.getStartOfDay(selectedDates[0]));
     let lastDay = new Date(this.getEndOfDay(selectedDates[selectedDates.length - 1]));
     console.log(firstDay, lastDay);
     this.setDatefilter(firstDay, lastDay);
     this.setPayments(this.allPayMents);
+    this.cal = false;
   }
   setDatefilter(firstDay, lastDay) {
     this.dateFilter.firstDay = firstDay;
