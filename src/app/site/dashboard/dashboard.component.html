@@ -80,8 +80,8 @@
           <div class="collapse payment-splits amount-right-pad" [id]="'collapse_'+payment.id">
             <ng-container *ngIf="payment.split[0].email===_userService.user['email'];else other">
 
-              <p>{{_userService.user['name']}}:${{payment.split[0].amount}}</p>
-              <p>{{_userService.user['partner_name']}}:${{payment.split[1].amount}}</p>
+              <p>{{_userService.user['name']}}: ${{payment.split[0].amount}}</p>
+              <p>{{_userService.user['partner_name']}}: ${{payment.split[1].amount}}</p>
             </ng-container>
             <ng-template #other>
               <p>{{_userService.user['name']}}: ${{payment.split[1].amount}}</p>
