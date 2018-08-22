@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
   async login(formDetails) {
     this.error = '';
-
+    formDetails['email'] = formDetails['email'].trim().toLowerCase();
     this.btnRef.nativeElement.textContent = 'Please Wait...';
     this.btnRef.nativeElement.disabled = true;
     try {

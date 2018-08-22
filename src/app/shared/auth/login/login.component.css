@@ -71,3 +71,20 @@
   color:#4878EF;
   font-size: 0.77rem;
 }
+.fireBase-error{
+  position: relative;
+  float: left;
+  top: 6px;
+  word-wrap: break-word;
+  color: #FF6737;
+  padding: 0;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  margin: 0 0 12px 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  display: block;
+  font-family: Open Sans, Bold;
+}
