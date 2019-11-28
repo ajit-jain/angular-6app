@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare var jQuery: any;
+declare var window: any;
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -34,5 +35,8 @@ export class SettingsComponent implements OnInit {
     await this._authService.signOut();
     this.router.navigate(['/']);
   }
-
+  openEmail(){
+    let mailId = 'splitiiapp@gmail.com';
+    window.location.href = `mailto:${mailId}`;
+  }
 }

@@ -1,6 +1,7 @@
 import { UserService } from 'src/app/shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-not-connected',
@@ -9,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class NotConnectedComponent implements OnInit {
 
-  constructor(private _userService:UserService) { }
+  constructor(private _userService:UserService,private _authService:AuthService,private router:Router) { }
 
   ngOnInit() {
   }
-
+  async logout(){
+    await this._authService.signOut();
+    this.router.navigate(['/']);
+  }
 }

@@ -44,3 +44,12 @@
     position: relative;
     top: -2px;
 }
+.logout-btN {
+    position: absolute;
+    right: 0;
+    top:10px;
+    cursor: pointer;
+}
+.logout-btN a{
+    cursor: pointer;
+}
